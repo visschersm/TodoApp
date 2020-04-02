@@ -18,3 +18,10 @@ C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Api\obj\Debug\netcoreapp
 C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Api\obj\Debug\netcoreapp5.0\Api.dll
 C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Api\obj\Debug\netcoreapp5.0\Api.pdb
 C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Api\obj\Debug\netcoreapp5.0\Api.genruntimeconfig.cache
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Api\bin\Debug\netcoreapp5.0\Application.dll
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Api\bin\Debug\netcoreapp5.0\DependencyRegistration.dll
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Api\bin\Debug\netcoreapp5.0\RequestHandler.dll
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Api\bin\Debug\netcoreapp5.0\RequestHandler.pdb
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Api\bin\Debug\netcoreapp5.0\DependencyRegistration.pdb
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Api\bin\Debug\netcoreapp5.0\Application.pdb
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Api\obj\Debug\netcoreapp5.0\Api.csproj.CopyComplete

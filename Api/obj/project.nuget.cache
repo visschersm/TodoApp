@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "gff6hs8hSTcRJMorjn8VAdy6qp1wCGeya8TEf8cyAyOt7bhix/bRadm6mCWO80AxvR1eA9cBVelBJCu8dCCveg==",
+  "dgSpecHash": "z5epdlREHTTNbD/wmuqpXhj/wZUc3Yrf2CA64NWvL/4Ba8RMJkFyzkP+daNlUip47MDTYAqM85r86KiZDffz8A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Vissc\\OneDrive\\Documents\\GitHub\\csharp\\TodoApp\\Api\\Api.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Vissc\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.3\\microsoft.extensions.dependencyinjection.abstractions.3.1.3.nupkg.sha512"
+  ],
   "logs": []
 }

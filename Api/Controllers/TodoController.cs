@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MTech.RequestHandler;
+using MTech.Application.TodoItem.Requests;
 
 namespace MTech.TodoApp
 {
@@ -21,6 +23,8 @@ namespace MTech.TodoApp
         public async Task<IActionResult> Get()
         {
             _handler.Handle(new GetAllTodoItemsRequest());
+
+            throw new NotImplementedException();
         }
     }
 }

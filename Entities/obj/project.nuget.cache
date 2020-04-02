@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2TkyAb6nHtbYLDhdVrF1r47rSKsQnZNVd80STPGkSY10uqGdC/RaC5kjxqHzXjGW1y4k5QyYHBVM0sR/V5176Q==",
+  "dgSpecHash": "TJ5goyb7X06fTStzq0OimytRrcN5tYLV+M6FDZKAZynGD+rjQ7D3MzhLRNvLlTdvFMcPSbHOWYLcC9Em5QSIqg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Vissc\\OneDrive\\Documents\\GitHub\\csharp\\TodoApp\\Entities\\Entities.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Vissc\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\Vissc\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,0 +1,9 @@
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Entities\bin\Debug\netstandard2.1\Entities.deps.json
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Entities\bin\Debug\netstandard2.1\Entities.dll
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Entities\bin\Debug\netstandard2.1\Entities.pdb
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Entities\obj\Debug\netstandard2.1\Entities.csprojAssemblyReference.cache
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Entities\obj\Debug\netstandard2.1\Entities.AssemblyInfoInputs.cache
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Entities\obj\Debug\netstandard2.1\Entities.AssemblyInfo.cs
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Entities\obj\Debug\netstandard2.1\Entities.csproj.CoreCompileInputs.cache
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Entities\obj\Debug\netstandard2.1\Entities.dll
+C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\Entities\obj\Debug\netstandard2.1\Entities.pdb
