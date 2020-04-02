@@ -1,0 +1,66 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v5.0": []
+  },
+  "packageFolders": {
+    "C:\\Users\\Vissc\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Vissc\\OneDrive\\Documents\\GitHub\\csharp\\TodoApp\\Api\\Api.csproj",
+      "projectName": "Api",
+      "projectPath": "C:\\Users\\Vissc\\OneDrive\\Documents\\GitHub\\csharp\\TodoApp\\Api\\Api.csproj",
+      "packagesPath": "C:\\Users\\Vissc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Vissc\\OneDrive\\Documents\\GitHub\\csharp\\TodoApp\\Api\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Vissc\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp5.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp5.0": {
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp5.0": {
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.100-preview.1.20155.7\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
