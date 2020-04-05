@@ -5,8 +5,8 @@ using Moq;
 using MTech.RequestHandler;
 using MTech.TodoApp.Api;
 using MTech.TodoApp.ApiTests.Utilities;
-using MTech.TodoApp.TodoItem.Requests;
 using MTech.TodoApp.TodoItem.Results;
+using System;
 using System.Threading.Tasks;
 
 namespace MTech.TodoApp.ApiTests
@@ -14,34 +14,43 @@ namespace MTech.TodoApp.ApiTests
     [TestClass]
     public class TodoControllerTests : IBaseTest
     {
-        private Mock<IHandler> _mockHandler => new Mock<IHandler>();
+        private readonly Mock<IHandler> _mockHandler = new Mock<IHandler>();
 
         public void RegisterDependencies(IServiceCollection services)
         {
-            services.AddTransient((factory) => { return _mockHandler.Object; });
+            services.AddScoped<IHandler>(factory => _mockHandler.Object);
         }
 
-        [TestClass]
-        public class Get : TodoControllerTests
+        [TestMethod]
+        public async Task Get_ValidRequest_OkObjectResult()
         {
-            [TestMethod]
-            public async Task ValidRequest_OkObjectResult()
-            {
-                _mockHandler.Setup(
-                    x => x.HandleQueryAsync<GetAllTodoItemsRequest, TodoItemListViewResult>(
-                        It.IsAny<GetAllTodoItemsRequest>()))
-                    .ReturnsAsync(new TodoItemListViewResult
-                    {
-                        Succesfull = true,
-                        //TodoItemList = Array.Empty<TodoItemListView>()
-                    });
+            _mockHandler.Setup(
+                x => x.HandleQueryAsync<IRequest, TodoItemListViewResult>(
+                    It.IsAny<IRequest>()))
+                .ReturnsAsync(new TodoItemListViewResult
+                {
+                    Succesfull = true,
+                });
 
-                var controller = ControllerFactory.Create<TodoControllerTests, TodoController>(this);
+            var controller = ControllerFactory.Create<TodoController>(this);
 
-                var result = await controller.Get();
+            var result = await controller.Get();
 
-                Assert.IsInstanceOfType(result, typeof(OkObjectResult));
-            }
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        }
+
+        [TestMethod]
+        public async Task Get_HandlerThrows_ExceptionThrown()
+        {
+            _mockHandler.Setup(
+                x => x.HandleQueryAsync<IRequest, TodoItemListViewResult>(
+                    It.IsAny<IRequest>()))
+                .ThrowsAsync(new Exception());
+
+            var controller = ControllerFactory.Create<TodoController>(this);
+
+            await Assert.ThrowsExceptionAsync<Exception>(async () =>
+                await controller.Get());
         }
     }
 }

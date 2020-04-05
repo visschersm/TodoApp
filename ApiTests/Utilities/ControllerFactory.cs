@@ -5,15 +5,14 @@ namespace MTech.TodoApp.ApiTests.Utilities
 {
     public static class ControllerFactory
     {
-        public static TController Create<TCaller, TController>(TCaller caller)
-            where TCaller : IBaseTest
+        public static TController Create<TController>(object caller)
             where TController : ControllerBase
         {
             var services = new ServiceCollection();
 
-            caller.RegisterDependencies(services);
+            ((IBaseTest)caller).RegisterDependencies(services);
 
-            services.AddTransient<TController>();
+            services.AddScoped<TController>();
 
             var serviceProvider = services.BuildServiceProvider();
             var controller = serviceProvider.GetService<TController>();

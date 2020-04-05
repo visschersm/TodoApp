@@ -25,7 +25,7 @@ namespace MTech.TodoApp.Api
             if (!result.Succesfull)
                 return StatusCode(StatusCodes.Status500InternalServerError);
 
-            return StatusCode(StatusCodes.Status501NotImplemented);
+            return Ok(result.TodoItemList);
         }
     }
 }
