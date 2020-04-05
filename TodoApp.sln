@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestHandler", "RequestHandler\RequestHandler.csproj", "{D6129135-3693-4079-BA2D-DDEFDCEB20D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTests", "ApiTests\ApiTests.csproj", "{3609AA13-8DB6-4213-A437-35FD78E7EEBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,5 +72,17 @@ Global
 		{D6129135-3693-4079-BA2D-DDEFDCEB20D4}.Release|x64.Build.0 = Release|Any CPU
 		{D6129135-3693-4079-BA2D-DDEFDCEB20D4}.Release|x86.ActiveCfg = Release|Any CPU
 		{D6129135-3693-4079-BA2D-DDEFDCEB20D4}.Release|x86.Build.0 = Release|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Debug|x64.Build.0 = Debug|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Debug|x86.Build.0 = Debug|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Release|x64.ActiveCfg = Release|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Release|x64.Build.0 = Release|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Release|x86.ActiveCfg = Release|Any CPU
+		{3609AA13-8DB6-4213-A437-35FD78E7EEBC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

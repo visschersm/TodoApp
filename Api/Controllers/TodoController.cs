@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using MTech.RequestHandler;
 using MTech.Application.TodoItem.Requests;
+using Microsoft.AspNetCore.Http;
 
-namespace MTech.TodoApp
+namespace MTech.TodoApp.Api
 {
     [ApiController]
     [Route("[controller]")]
@@ -22,9 +19,12 @@ namespace MTech.TodoApp
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            _handler.Handle(new GetAllTodoItemsRequest());
+            var result = await _handler.Handle(new GetAllTodoItemsRequest());
 
-            throw new NotImplementedException();
+            if(!result.Succesfull)
+                return StatusCode(StatusCodes.Status500InternalServerError);
+
+            return StatusCode(StatusCodes.Status501NotImplemented);
         }
     }
 }

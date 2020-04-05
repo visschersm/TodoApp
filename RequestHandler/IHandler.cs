@@ -1,10 +1,10 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 
 namespace MTech.RequestHandler
 {
     public interface IHandler
     {
-        IRequestResult Handle(IRequest request);
-        ICommandResult Handle(ICommand command);
+        Task<IRequestResult> Handle(IRequest request);
+        Task<ICommandResult> Handle(ICommand command);
     }
 }

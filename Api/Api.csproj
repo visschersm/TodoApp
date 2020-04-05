@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp5.0</TargetFramework>
-    <RootNamespace>MTech.TodoApp</RootNamespace>
+    <RootNamespace>MTech.TodoApp.Api</RootNamespace>
   </PropertyGroup>
 
 
