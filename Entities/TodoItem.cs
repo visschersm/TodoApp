@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Entities
+﻿namespace MTech.TodoApp.Entities
 {
     public class TodoItem
     {
-        
+
     }
 }

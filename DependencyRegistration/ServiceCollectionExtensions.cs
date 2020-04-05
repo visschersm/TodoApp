@@ -7,9 +7,9 @@ namespace MTech.DependencyRegistration
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IHandler, Handler>();
+            services.AddScoped<IHandler, DefaultHandler>();
 
             return services;
-        } 
+        }
     }
 }

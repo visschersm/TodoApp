@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp5.0</TargetFramework>
-    <RootNamespace>MTech.TodoApp.Entities</RootNamespace>
+    <RootNamespace>MTech.TodoApp.ViewModel</RootNamespace>
   </PropertyGroup>
 
 </Project>

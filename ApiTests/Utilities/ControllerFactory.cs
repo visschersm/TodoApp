@@ -1,18 +1,19 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using MTech.RequestHandler;
-using MTech.TodoApp.Api;
 
-namespace MTech.ApiTests.Utilities
+namespace MTech.TodoApp.ApiTests.Utilities
 {
     public static class ControllerFactory
     {
-        public static TController Create<TController>(params object[] args)
+        public static TController Create<TCaller, TController>(TCaller caller)
+            where TCaller : IBaseTest
             where TController : ControllerBase
         {
             var services = new ServiceCollection();
-            services.AddTransient<IHandler, Handler>();
+
+            caller.RegisterDependencies(services);
+
+            services.AddTransient<TController>();
 
             var serviceProvider = services.BuildServiceProvider();
             var controller = serviceProvider.GetService<TController>();

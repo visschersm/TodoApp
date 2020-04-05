@@ -1,15 +1,16 @@
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MTech.RequestHandler;
-using MTech.Application.TodoItem.Requests;
-using Microsoft.AspNetCore.Http;
+using MTech.TodoApp.TodoItem.Requests;
+using MTech.TodoApp.TodoItem.Results;
+using System.Threading.Tasks;
 
 namespace MTech.TodoApp.Api
 {
     [ApiController]
     [Route("[controller]")]
     public class TodoController : ControllerBase
-    { 
+    {
         private readonly IHandler _handler;
         public TodoController(IHandler handler)
         {
@@ -19,9 +20,9 @@ namespace MTech.TodoApp.Api
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _handler.Handle(new GetAllTodoItemsRequest());
+            var result = await _handler.HandleQueryAsync<GetAllTodoItemsRequest, TodoItemListViewResult>(new GetAllTodoItemsRequest());
 
-            if(!result.Succesfull)
+            if (!result.Succesfull)
                 return StatusCode(StatusCodes.Status500InternalServerError);
 
             return StatusCode(StatusCodes.Status501NotImplemented);

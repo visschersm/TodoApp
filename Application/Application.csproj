@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <RootNamespace>MTech.TodoApp</RootNamespace>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\RequestHandler\RequestHandler.csproj" />
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>MTech.Application</RootNamespace>
-  </PropertyGroup>
 
 </Project>
