@@ -1,9 +1,0 @@
-C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\RequestHandler\obj\Debug\netstandard2.1\RequestHandler.csprojAssemblyReference.cache
-C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\RequestHandler\obj\Debug\netstandard2.1\RequestHandler.AssemblyInfoInputs.cache
-C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\RequestHandler\obj\Debug\netstandard2.1\RequestHandler.AssemblyInfo.cs
-C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\RequestHandler\obj\Debug\netstandard2.1\RequestHandler.csproj.CoreCompileInputs.cache
-C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\RequestHandler\bin\Debug\netstandard2.1\RequestHandler.deps.json
-C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\RequestHandler\bin\Debug\netstandard2.1\RequestHandler.dll
-C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\RequestHandler\bin\Debug\netstandard2.1\RequestHandler.pdb
-C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\RequestHandler\obj\Debug\netstandard2.1\RequestHandler.dll
-C:\Users\Vissc\OneDrive\Documents\GitHub\csharp\TodoApp\RequestHandler\obj\Debug\netstandard2.1\RequestHandler.pdb
