@@ -2,20 +2,27 @@
 
 namespace MTech.RequestHandler
 {
-    public interface IQueryHandler<TRequest, TResponse>
+    public interface IQueryHandler<TQueryRequest, TQueryResult>
+        where TQueryRequest : IQueryRequest
+        where TQueryResult : IQueryResult
     {
-        public Task<TResponse> HandleAsync(TRequest request);
+        Task<TQueryResult> Handle(TQueryRequest request);
     }
 
-    public interface ICommandHandler<TRequest>
-        where TRequest : IRequest
+    public interface ICommandHandler<TCommandRequest, TCommandResult>
+        where TCommandRequest : ICommandRequest
+        where TCommandResult : ICommandResult
     {
-        public Task<IRequestResult> HandleAsync(TRequest request);
+        Task<TCommandResult> Handle(TCommandRequest request);
     }
 
     public interface IHandler
     {
-        Task<TResponse> HandleQueryAsync<TRequest, TResponse>(TRequest request) where TRequest : IRequest;
-        Task<IRequestResult> HandleCommandAsync<TRequest>(TRequest request) where TRequest : IRequest;
+        Task<TQueryResult> HandleQuery<TQueryRequest, TQueryResult>(TQueryRequest request)
+            where TQueryRequest : IQueryRequest
+            where TQueryResult : IQueryResult;
+        Task<TCommandResult> HandleCommand<TCommandRequest, TCommandResult>(TCommandRequest request)
+            where TCommandRequest : ICommandRequest
+            where TCommandResult : ICommandResult;
     }
 }

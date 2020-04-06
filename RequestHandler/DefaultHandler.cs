@@ -13,28 +13,32 @@ namespace MTech.RequestHandler
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<TResponse> HandleQueryAsync<TRequest, TResponse>(TRequest request) where TRequest : IRequest
+        public async Task<TQueryResult> HandleQuery<TQueryRequest, TQueryResult>(TQueryRequest request)
+            where TQueryRequest : IQueryRequest
+            where TQueryResult : IQueryResult
         {
-            var handler = _serviceProvider.GetService<IQueryHandler<TRequest, TResponse>>();
+            var handler = _serviceProvider.GetService<IQueryHandler<TQueryRequest, TQueryResult>>();
 
-            if (!((handler != null) && handler is IQueryHandler<TRequest, TResponse>))
+            if (!((handler != null) && handler is IQueryHandler<TQueryRequest, TQueryResult>))
             {
                 //throw new CommandHandlerNotFoundException(typeof(TCommand));
                 throw new NotImplementedException();
             }
 
-            return await handler.HandleAsync(request);
+            return await handler.Handle(request);
 
         }
-        public async Task<IRequestResult> HandleCommandAsync<TRequest>(TRequest request) where TRequest : IRequest
+        public async Task<TCommandResult> HandleCommand<TCommandRequest, TCommandResult>(TCommandRequest request)
+            where TCommandRequest : ICommandRequest
+            where TCommandResult : ICommandResult
         {
-            var handler = _serviceProvider.GetService<ICommandHandler<TRequest>>();
-            if (!((handler != null) && handler is ICommandHandler<TRequest>))
+            var handler = _serviceProvider.GetService<ICommandHandler<TCommandRequest, TCommandResult>>();
+            if (!((handler != null) && handler is ICommandHandler<TCommandRequest, TCommandResult>))
             {
                 //throw new ValidationHandlerNotFoundException(typeof(TRequest));
                 throw new NotImplementedException();
             }
-            return await handler.HandleAsync(request);
+            return await handler.Handle(request);
         }
     }
 }

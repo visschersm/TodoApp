@@ -1,6 +1,6 @@
 namespace MTech.RequestHandler
 {
-    public interface ICommandResult
+    public interface ICommandResult : IRequestResult
     {
          
     }

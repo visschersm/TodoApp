@@ -5,7 +5,7 @@ using MTech.TodoApp.TodoItem.Requests;
 using MTech.TodoApp.TodoItem.Results;
 using System.Threading.Tasks;
 
-namespace MTech.TodoApp.Api
+namespace MTech.TodoApp.TodoApi
 {
     [ApiController]
     [Route("[controller]")]
@@ -20,12 +20,26 @@ namespace MTech.TodoApp.Api
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _handler.HandleQueryAsync<GetAllTodoItemsRequest, TodoItemListViewResult>(new GetAllTodoItemsRequest());
+            var result = await _handler.HandleQuery<GetAllTodoItemsRequest, TodoItemListViewResult>(
+                new GetAllTodoItemsRequest());
 
             if (!result.Succesfull)
                 return StatusCode(StatusCodes.Status500InternalServerError);
 
-            return Ok(result.TodoItemList);
+            return Ok(result.Data);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _handler.HandleQuery<GetTodoItemByIdRequest, DetailedTodoItemViewResult>(
+                new GetTodoItemByIdRequest(id));
+
+            if(!result.Succesfull)
+                return NotFound($"Could not find TodoItem with id: {id}");
+            
+            return Ok(result.Data);
         }
     }
 }

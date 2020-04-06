@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace MTech.TodoApp.ApiTests.Utilities
+namespace MTech.Tests.Utilities
 {
     public static class DependencyInjection
     {

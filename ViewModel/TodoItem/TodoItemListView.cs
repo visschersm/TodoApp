@@ -1,6 +1,6 @@
 ﻿namespace MTech.TodoApp.ViewModel.TodoItem
 {
-    public class TodoItemListView
+    public class TodoItemListView : IViewOf<Entities.TodoItem>
     {
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace MTech.TodoApp.ApiTests
+namespace MTech.Tests.Utilities
 {
     public interface IBaseTest
     {

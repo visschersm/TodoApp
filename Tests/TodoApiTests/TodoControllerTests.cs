@@ -2,14 +2,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using MTech.RequestHandler;
-using MTech.TodoApp.Api;
-using MTech.TodoApp.ApiTests.Utilities;
-using MTech.TodoApp.TodoItem.Results;
 using System;
 using System.Threading.Tasks;
+using MTech.Tests.Utilities;
+using MTech.RequestHandler;
+using MTech.TodoApp.TodoApi;
+using MTech.TodoApp.TodoItem.Requests;
+using MTech.TodoApp.TodoItem.Results;
 
-namespace MTech.TodoApp.ApiTests
+namespace MTech.Tests.TodoApiTests
 {
     [TestClass]
     public class TodoControllerTests : IBaseTest
@@ -25,8 +26,8 @@ namespace MTech.TodoApp.ApiTests
         public async Task Get_ValidRequest_OkObjectResult()
         {
             _mockHandler.Setup(
-                x => x.HandleQueryAsync<IRequest, TodoItemListViewResult>(
-                    It.IsAny<IRequest>()))
+                x => x.HandleQuery<GetAllTodoItemsRequest, TodoItemListViewResult>(
+                    It.IsAny<GetAllTodoItemsRequest>()))
                 .ReturnsAsync(new TodoItemListViewResult
                 {
                     Succesfull = true,
@@ -43,8 +44,8 @@ namespace MTech.TodoApp.ApiTests
         public async Task Get_HandlerThrows_ExceptionThrown()
         {
             _mockHandler.Setup(
-                x => x.HandleQueryAsync<IRequest, TodoItemListViewResult>(
-                    It.IsAny<IRequest>()))
+                x => x.HandleQuery<GetAllTodoItemsRequest, TodoItemListViewResult>(
+                    It.IsAny<GetAllTodoItemsRequest>()))
                 .ThrowsAsync(new Exception());
 
             var controller = ControllerFactory.Create<TodoController>(this);

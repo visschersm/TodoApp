@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp5.0</TargetFramework>
-    <RootNamespace>MTech.TodoApp.Api</RootNamespace>
+    <RootNamespace>MTech.TodoApp.TodoApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\TodoApp\TodoApp.csproj" />
     <ProjectReference Include="..\DependencyRegistration\DependencyRegistration.csproj" />
     <ProjectReference Include="..\RequestHandler\RequestHandler.csproj" />
     <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
