@@ -6,7 +6,7 @@ namespace MTech.TodoApp.TodoItem.Results
 {
     public class TodoItemListViewResult : IQueryResult
     {
-        public bool Succesfull { get; set; }
+        public bool Successfull { get; set; }
         public TodoItemListView[] Data { get; internal set; }
     }
 }
