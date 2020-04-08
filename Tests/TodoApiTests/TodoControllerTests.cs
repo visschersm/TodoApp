@@ -9,6 +9,8 @@ using MTech.RequestHandler;
 using MTech.TodoApp.TodoApi;
 using MTech.TodoApp.TodoItem.Requests;
 using MTech.TodoApp.TodoItem.Results;
+using MTech.TodoApp.TodoItem.Commands;
+using MTech.TodoApp.ViewModel;
 
 namespace MTech.Tests.TodoApiTests
 {
@@ -23,6 +25,29 @@ namespace MTech.Tests.TodoApiTests
         }
 
         [TestMethod]
+        public async Task Create_ValidRequest_OkObjectResult()
+        {
+            _mockHandler.Setup(
+                x => x.HandleCommand<CreateTodoItemCommand, CreateTodoItemCommandResult>(
+                    It.IsAny<CreateTodoItemCommand>()))
+                .ReturnsAsync(new CreateTodoItemCommandResult
+                {
+                    Successfull = true      
+                });
+
+            var toCreate = new MTech.TodoApp.ViewModel.TodoItem.CreateView();
+
+            var controller = ControllerFactory.Create<TodoController>(this);
+
+            var result = await controller.Create(toCreate);
+
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(
+                ((OkObjectResult)result).Value,
+                typeof(CreateTodoItemCommandResult));
+        }
+
+        [TestMethod]
         public async Task Get_ValidRequest_OkObjectResult()
         {
             _mockHandler.Setup(
@@ -30,7 +55,7 @@ namespace MTech.Tests.TodoApiTests
                     It.IsAny<GetAllTodoItemsRequest>()))
                 .ReturnsAsync(new TodoItemListViewResult
                 {
-                    Succesfull = true,
+                    Successfull = true,
                 });
 
             var controller = ControllerFactory.Create<TodoController>(this);
