@@ -11,6 +11,13 @@ namespace MTech.TodoApp.ViewModel
         {
             return source.Select(ViewHelper<TEntity, TView>.SelectExpression);
         }
+
+        //public static IQueryable<TView> ProjectTo<TView>(this IQueryable source)
+        //{
+        //
+        //    var elementType = source.ElementType;
+        //    return source.Select(ViewHelper.SelectExpression<TView>(source.ElementType));
+        //}
     }
 
     public static class ViewHelper<TEntity, TView>
