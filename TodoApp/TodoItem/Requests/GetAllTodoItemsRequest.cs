@@ -7,12 +7,15 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using MTech.TodoApp.ViewModel.TodoItem;
 using MTech.TodoApp.ViewModel;
+using MTech.TodoApp.Entities;
 
 namespace MTech.TodoApp.TodoItem.Requests
 {
-    public class GetAllTodoItemsRequest : IQueryRequest
+    public class GetAllTodoItemsRequest<TView> : IQueryRequest
+        where TView : IViewOf<Entities.TodoItem>
     {
-        internal class GetAllTodoItemsRequestHandler : IQueryHandler<GetAllTodoItemsRequest, TodoItemListViewResult>
+        internal class GetAllTodoItemsRequestHandler 
+            : IQueryHandler<GetAllTodoItemsRequest<TView>, TodoItemListViewResult<TView>>
         {
             private readonly ITodoContext _context;
             private readonly DbSet<Entities.TodoItem> _repository;
@@ -23,13 +26,13 @@ namespace MTech.TodoApp.TodoItem.Requests
                 _repository = _context.Set<Entities.TodoItem>();
             }
 
-            public async Task<TodoItemListViewResult> Handle(GetAllTodoItemsRequest request)
+            public async Task<TodoItemListViewResult<TView>> Handle(GetAllTodoItemsRequest<TView> request)
             {
                 var result = await _repository.AsNoTracking()
-                    .ProjectTo<Entities.TodoItem, TodoItemListView>()
+                    .ProjectTo<Entities.TodoItem, TView>()
                     .ToArrayAsync();
 
-                return new TodoItemListViewResult
+                return new TodoItemListViewResult<TView>
                 {
                     Successfull = true,
                     Data = result

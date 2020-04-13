@@ -38,8 +38,8 @@ namespace MTech.TodoApp.TodoApi
         [ProducesResponseType(typeof(TodoItemListView[]), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            var result = await _handler.HandleQuery<GetAllTodoItemsRequest, TodoItemListViewResult>(
-                new GetAllTodoItemsRequest());
+            var result = await _handler.HandleQuery<GetAllTodoItemsRequest<TodoItemListView>, TodoItemListViewResult<TodoItemListView>>(
+                new GetAllTodoItemsRequest<TodoItemListView>());
 
             if (!result.Successfull)
                 return StatusCode(StatusCodes.Status500InternalServerError);

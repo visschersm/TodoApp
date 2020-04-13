@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace MTech.TodoApp.TodoItem.Results
 {
-    public class TodoItemListViewResult : IQueryResult
+    public class TodoItemListViewResult<TView> : IQueryResult
     {
         public bool Successfull { get; set; }
-        public TodoItemListView[] Data { get; internal set; }
+        public TView[] Data { get; internal set; }
     }
 }

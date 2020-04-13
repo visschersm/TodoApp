@@ -10,7 +10,7 @@ using MTech.TodoApp.TodoApi;
 using MTech.TodoApp.TodoItem.Requests;
 using MTech.TodoApp.TodoItem.Results;
 using MTech.TodoApp.TodoItem.Commands;
-using MTech.TodoApp.ViewModel;
+using MTech.TodoApp.ViewModel.TodoItem;
 
 namespace MTech.Tests.TodoApiTests
 {
@@ -51,9 +51,9 @@ namespace MTech.Tests.TodoApiTests
         public async Task Get_ValidRequest_OkObjectResult()
         {
             _mockHandler.Setup(
-                x => x.HandleQuery<GetAllTodoItemsRequest, TodoItemListViewResult>(
-                    It.IsAny<GetAllTodoItemsRequest>()))
-                .ReturnsAsync(new TodoItemListViewResult
+                x => x.HandleQuery<GetAllTodoItemsRequest<TodoItemListView>, TodoItemListViewResult<TodoItemListView>>(
+                    It.IsAny<GetAllTodoItemsRequest<TodoItemListView>>()))
+                .ReturnsAsync(new TodoItemListViewResult<TodoItemListView>
                 {
                     Successfull = true,
                 });
@@ -69,8 +69,8 @@ namespace MTech.Tests.TodoApiTests
         public async Task Get_HandlerThrows_ExceptionThrown()
         {
             _mockHandler.Setup(
-                x => x.HandleQuery<GetAllTodoItemsRequest, TodoItemListViewResult>(
-                    It.IsAny<GetAllTodoItemsRequest>()))
+                x => x.HandleQuery<GetAllTodoItemsRequest<TodoItemListView>, TodoItemListViewResult<TodoItemListView>>(
+                    It.IsAny<GetAllTodoItemsRequest<TodoItemListView>>()))
                 .ThrowsAsync(new Exception());
 
             var controller = ControllerFactory.Create<TodoController>(this);

@@ -9,4 +9,8 @@
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-preview.2.20167.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+  </ItemGroup>
+
 </Project>
