@@ -4,15 +4,14 @@ using System.Threading.Tasks;
 using MTech.TodoApp.TodoItem.Results;
 using MTech.TodoApp.DataModel.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using MTech.TodoApp.ViewModel.TodoItem;
-using MTech.TodoApp.ViewModel;
+using ViewModel = MTech.TodoApp.ViewModel;
 using MTech.TodoApp.Entities;
+using MTech.TodoApp.ViewModel;
 
 namespace MTech.TodoApp.TodoItem.Requests
 {
     public class GetAllTodoItemsRequest<TView> : IQueryRequest
-        where TView : IViewOf<Entities.TodoItem>
+        where TView : ViewModel.IViewOf<Entities.TodoItem>
     {
         internal class GetAllTodoItemsRequestHandler 
             : IQueryHandler<GetAllTodoItemsRequest<TView>, TodoItemListViewResult<TView>>

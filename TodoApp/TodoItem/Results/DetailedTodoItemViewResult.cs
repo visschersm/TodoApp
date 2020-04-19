@@ -1,11 +1,11 @@
 using MTech.RequestHandler;
-using MTech.TodoApp.ViewModel.TodoItem;
+using ViewModel = MTech.TodoApp.ViewModel;
 
 namespace MTech.TodoApp.TodoItem.Results
 {
     public class DetailedTodoItemViewResult : IQueryResult
     {
         public bool Successfull { get; set; }
-        public DetailedTodoItemView Data { get; set; }
+        public ViewModel.TodoItem.DetailedView Data { get; set; }
     }
 }

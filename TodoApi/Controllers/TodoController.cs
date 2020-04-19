@@ -21,7 +21,7 @@ namespace MTech.TodoApp.TodoApi
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(typeof(CreatedTodoItemView), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ViewModel.TodoItem.CreatedView), StatusCodes.Status200OK)]
         public async Task<IActionResult> Create([FromBody]ViewModel.TodoItem.CreateView toCreate)
         {
             var result = await _handler.HandleCommand<CreateTodoItemCommand, CreateTodoItemCommandResult>(
@@ -35,11 +35,12 @@ namespace MTech.TodoApp.TodoApi
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(typeof(TodoItemListView[]), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ViewModel.TodoItem.ListView[]), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            var result = await _handler.HandleQuery<GetAllTodoItemsRequest<TodoItemListView>, TodoItemListViewResult<TodoItemListView>>(
-                new GetAllTodoItemsRequest<TodoItemListView>());
+            var result = await _handler.HandleQuery<GetAllTodoItemsRequest<ViewModel.TodoItem.ListView>, 
+                TodoItemListViewResult<ViewModel.TodoItem.ListView>>(
+                    new GetAllTodoItemsRequest<ViewModel.TodoItem.ListView>());
 
             if (!result.Successfull)
                 return StatusCode(StatusCodes.Status500InternalServerError);

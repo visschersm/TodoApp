@@ -6,7 +6,7 @@ using MTech.TodoApp.TodoItem.Results;
 using MTech.TodoApp.DataModel.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using MTech.TodoApp.ViewModel.TodoItem;
+using ViewModel = MTech.TodoApp.ViewModel;
 using MTech.TodoApp.ViewModel;
 
 namespace MTech.TodoApp.TodoItem.Requests
@@ -33,7 +33,7 @@ namespace MTech.TodoApp.TodoItem.Requests
             {
                 var result = await _repository.AsNoTracking()
                     .Where(x => x.Id == request.Id)
-                    .ProjectTo<Entities.TodoItem, DetailedTodoItemView>()
+                    .ProjectTo<Entities.TodoItem, ViewModel.TodoItem.DetailedView>()
                     .SingleOrDefaultAsync();
 
                 return new DetailedTodoItemViewResult

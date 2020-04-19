@@ -3,18 +3,23 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MTech.Tests.Utilities
 {
-    public static class ControllerFactory
+    public class ControllerFactory
     {
-        public static TController Create<TController>(object caller)
+        public ControllerFactory()
+        {
+            Services = new ServiceCollection();
+        }
+
+        public IServiceCollection Services { get; }
+
+        public TController Create<TController>()
             where TController : ControllerBase
         {
-            var services = new ServiceCollection();
+            Services.AddTestDependencies();
 
-            ((IBaseTest)caller).RegisterDependencies(services);
+            Services.AddScoped<TController>();
 
-            services.AddScoped<TController>();
-
-            var serviceProvider = services.BuildServiceProvider();
+            var serviceProvider = Services.BuildServiceProvider();
             var controller = serviceProvider.GetService<TController>();
 
             return controller;
