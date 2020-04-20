@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>MTech.TodoApp.ViewModel</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utilities\ViewModel\ViewModel.csproj" />
+    <ProjectReference Include="..\..\Core\Entities\TodoApp.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
