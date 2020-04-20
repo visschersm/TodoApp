@@ -38,7 +38,7 @@ namespace MTech.TodoApp.TodoItem.Requests
 
                 return new DetailedTodoItemViewResult
                 {
-                    Succesfull = true,
+                    Successfull = true,
                     Data = result
                 };
             }
