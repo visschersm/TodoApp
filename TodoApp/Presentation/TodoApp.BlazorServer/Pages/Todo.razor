@@ -6,14 +6,59 @@
 
 <h3>Todo</h3>
 
+<ul>
+    @foreach (var todo in _todoItems)
+    {
+        <li>
+            @todo.Title
+        </li>
+    }
+</ul>
+
+<input placeholder="Add new todo" @bind="newTodo" />
+<button @onclick="AddTodo">Add Todo</button>
+
 @code {
-    private ViewModel.TodoItem.ListView[] _todoItems;
+    private IList<ViewModel.TodoItem.ListView> _todoItems = new List<ViewModel.TodoItem.ListView>();
+    private string newTodo = "";
 
     protected override async Task OnInitializedAsync()
     {
-        using var response = await Http.GetStreamAsync("https://localhost:44303/todo");
+        await UpdateTodoList();
+    }
 
-        _todoItems = await JsonSerializer.DeserializeAsync<ViewModel.TodoItem.ListView[]>(response);
+    private async Task UpdateTodoList()
+    {
+        var response = await Http.GetAsync("https://localhost:5001/todo");
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+
+            _todoItems = await JsonSerializer.DeserializeAsync<ViewModel.TodoItem.ListView[]>(responseStream, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+        }
+    }
+
+    private async Task AddTodo()
+    {
+        if (string.IsNullOrWhiteSpace(newTodo))
+            return;
+
+        var toCreate = new ViewModel.TodoItem.CreateView
+        {
+            Title = newTodo
+        };
+
+        var json = JsonSerializer.Serialize(toCreate);
+        var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        var response = await Http.PostAsync("https://localhost:5001/todo", data);
+        string result = await response.Content.ReadAsStringAsync();
+
+        newTodo = "";
+
+        await UpdateTodoList();
     }
 
 }

@@ -29,7 +29,7 @@ namespace MTech.TodoApp.TodoApi
             if (!result.Successfull)
                 return StatusCode(StatusCodes.Status500InternalServerError);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [HttpGet]
