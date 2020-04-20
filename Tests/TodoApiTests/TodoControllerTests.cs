@@ -4,10 +4,10 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MTech.Tests.Utilities;
+using MTech.TodoApp.CQRS.TodoItem.Commands;
+using MTech.TodoApp.CQRS.TodoItem.Requests;
+using MTech.TodoApp.CQRS.TodoItem.Results;
 using MTech.TodoApp.TodoApi;
-using MTech.TodoApp.TodoItem.Commands;
-using MTech.TodoApp.TodoItem.Requests;
-using MTech.TodoApp.TodoItem.Results;
 using MTech.Utilities.RequestHandler;
 using System;
 using System.Threading.Tasks;
@@ -54,9 +54,9 @@ namespace MTech.Tests.TodoApiTests
             var mockHandler = Mock.Of<IHandler>();
 
             Mock.Get(mockHandler).Setup(
-                x => x.HandleQuery<GetAllTodoItemsRequest<ViewModel.TodoItem.ListView>, TodoItemListViewResult<ViewModel.TodoItem.ListView>>(
-                    It.IsAny<GetAllTodoItemsRequest<ViewModel.TodoItem.ListView>>()))
-                .ReturnsAsync(new TodoItemListViewResult<ViewModel.TodoItem.ListView>
+                x => x.HandleQueryAsync<GetAllTodoItemsRequest, TodoItemListViewResult>(
+                    It.IsAny<GetAllTodoItemsRequest>()))
+                .ReturnsAsync(new TodoItemListViewResult
                 {
                     Successfull = true,
                 });
@@ -79,8 +79,8 @@ namespace MTech.Tests.TodoApiTests
             var mockHandler = Mock.Of<IHandler>();
 
             Mock.Get(mockHandler).Setup(
-                x => x.HandleQuery<GetAllTodoItemsRequest<ViewModel.TodoItem.ListView>, TodoItemListViewResult<ViewModel.TodoItem.ListView>>(
-                    It.IsAny<GetAllTodoItemsRequest<ViewModel.TodoItem.ListView>>()))
+                x => x.HandleQueryAsync<GetAllTodoItemsRequest, TodoItemListViewResult>(
+                    It.IsAny<GetAllTodoItemsRequest>()))
                 .ThrowsAsync(new Exception());
 
             factory.Services.Replace(ServiceDescriptor.Scoped(factory => mockHandler));

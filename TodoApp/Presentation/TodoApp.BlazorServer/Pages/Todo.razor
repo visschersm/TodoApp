@@ -1,0 +1,19 @@
+﻿@page "/todo"
+@using System.Net.Http
+@using ViewModel = MTech.TodoApp.ViewModel
+@using System.Text.Json
+@inject HttpClient Http
+
+<h3>Todo</h3>
+
+@code {
+    private ViewModel.TodoItem.ListView[] _todoItems;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var response = await Http.GetStreamAsync("https://localhost:44303/todo");
+
+        _todoItems = await JsonSerializer.DeserializeAsync<ViewModel.TodoItem.ListView[]>(response);
+    }
+
+}

@@ -1,10 +1,10 @@
 ﻿using MTech.Utilities.RequestHandler;
 
-namespace MTech.TodoApp.TodoItem.Results
+namespace MTech.TodoApp.CQRS.TodoItem.Results
 {
-    public class TodoItemListViewResult<TView> : IQueryResult
+    public class TodoItemListViewResult : IQueryResult
     {
         public bool Successfull { get; set; }
-        public TView[] Data { get; internal set; } = null!;
+        public ViewModel.TodoItem.ListView[] Data { get; set; } = null!;
     }
 }

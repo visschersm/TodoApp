@@ -1,21 +1,48 @@
-using MTech.TodoApp.TodoItem.Results;
+using MTech.TodoApp.CQRS.TodoItem.Results;
+using MTech.TodoApp.DataModel.Interfaces;
+using MTech.TodoApp.ViewModel.TodoItem;
 using MTech.Utilities.RequestHandler;
 using System.Threading.Tasks;
 
-namespace MTech.TodoApp.TodoItem.Commands
+namespace MTech.TodoApp.CQRS.TodoItem.Commands
 {
-    public class CreateTodoItemCommand : ICommandRequest
+    public class CreateTodoItemCommand : BaseTodoCommand
     {
+        public readonly CreateView CreateView;
+
         public CreateTodoItemCommand(ViewModel.TodoItem.CreateView toCreate)
         {
-
+            CreateView = toCreate;
         }
 
         internal class CreateTodoItemCommandHandler : ICommandHandler<CreateTodoItemCommand, CreateTodoItemCommandResult>
         {
-            public Task<CreateTodoItemCommandResult> Handle(CreateTodoItemCommand request)
+            private readonly ITodoContext _context;
+
+            public CreateTodoItemCommandHandler(ITodoContext context)
             {
-                throw new System.NotImplementedException();
+                _context = context;
+            }
+
+            public async Task<CreateTodoItemCommandResult> Handle(CreateTodoItemCommand request)
+            {
+                var toCreate = new Entities.TodoItem
+                {
+                    Title = request.CreateView.Title
+                };
+
+                var entity = _context.TodoItems.Add(toCreate).Entity;
+
+                await _context.SaveChangesAsync();
+
+                return new CreateTodoItemCommandResult
+                {
+                    Successfull = true,
+                    Data = new CreatedView
+                    {
+                        Title = entity.Title
+                    }
+                };
             }
         }
     }

@@ -1,17 +1,16 @@
 using Microsoft.EntityFrameworkCore;
+using MTech.TodoApp.CQRS.TodoItem.Results;
 using MTech.TodoApp.DataModel.Interfaces;
-using MTech.TodoApp.TodoItem.Results;
 using MTech.Utilities.RequestHandler;
 using MTech.Utilities.ViewModel;
 using System.Threading.Tasks;
 
-namespace MTech.TodoApp.TodoItem.Requests
+namespace MTech.TodoApp.CQRS.TodoItem.Requests
 {
-    public class GetAllTodoItemsRequest<TView> : IQueryRequest
-        where TView : IViewOf<Entities.TodoItem>
+    public class GetAllTodoItemsRequest : IQueryRequest
     {
-        internal class GetAllTodoItemsRequestHandler
-            : IQueryHandler<GetAllTodoItemsRequest<TView>, TodoItemListViewResult<TView>>
+        public class GetAllTodoItemsRequestHandler
+            : IQueryHandler<GetAllTodoItemsRequest, TodoItemListViewResult>
         {
             private readonly ITodoContext _context;
             private readonly DbSet<Entities.TodoItem> _repository;
@@ -22,13 +21,14 @@ namespace MTech.TodoApp.TodoItem.Requests
                 _repository = _context.Set<Entities.TodoItem>();
             }
 
-            public async Task<TodoItemListViewResult<TView>> Handle(GetAllTodoItemsRequest<TView> request)
+            public async Task<TodoItemListViewResult> HandleAsync(
+                GetAllTodoItemsRequest request)
             {
                 var result = await _repository.AsNoTracking()
-                    .ProjectTo<Entities.TodoItem, TView>()
+                    .ProjectTo<Entities.TodoItem, ViewModel.TodoItem.ListView>()
                     .ToArrayAsync();
 
-                return new TodoItemListViewResult<TView>
+                return new TodoItemListViewResult
                 {
                     Successfull = true,
                     Data = result

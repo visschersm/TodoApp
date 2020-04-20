@@ -29,7 +29,8 @@ namespace MTech.Utilities.ViewModel
         {
             get
             {
-                //Activator.CreateInstance(typeof(TView);
+                Activator.CreateInstance(typeof(TView));
+
                 return _expression;
             }
             set

@@ -13,21 +13,20 @@ namespace MTech.Utilities.RequestHandler
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<TQueryResult> HandleQuery<TQueryRequest, TQueryResult>(TQueryRequest request)
-            where TQueryRequest : IQueryRequest
-            where TQueryResult : IQueryResult
+        public async Task<TResponse> HandleQueryAsync<TRequest, TResponse>(TRequest request) where TRequest : IRequest
         {
-            var handler = _serviceProvider.GetService<IQueryHandler<TQueryRequest, TQueryResult>>();
+            var handler = _serviceProvider.GetService<IQueryHandler<TRequest, TResponse>>();
 
-            if (!((handler != null) && handler is IQueryHandler<TQueryRequest, TQueryResult>))
+            if (!((handler != null) && handler is IQueryHandler<TRequest, TResponse>))
             {
                 //throw new CommandHandlerNotFoundException(typeof(TCommand));
                 throw new NotImplementedException();
             }
 
-            return await handler.Handle(request);
+            return await handler.HandleAsync(request);
 
         }
+
         public async Task<TCommandResult> HandleCommand<TCommandRequest, TCommandResult>(TCommandRequest request)
             where TCommandRequest : ICommandRequest
             where TCommandResult : ICommandResult
