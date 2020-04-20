@@ -2,14 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>MTech.TodoApp</RootNamespace>
+    <RootNamespace>MTech.TodoApp.CQRS</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RequestHandler\RequestHandler.csproj" />
     <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
     <ProjectReference Include="..\DataModel.Interfaces\DataModel.Interfaces.csproj" />
-    <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Entities\TodoApp.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

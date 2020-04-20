@@ -1,12 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>MTech.TodoApp.TodoApi</RootNamespace>
+    <RootNamespace>MTech.TodoApp.Api</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TodoApp\TodoApp.csproj" />
+    <ProjectReference Include="..\TodoApp\TodoApp.CQRS.csproj" />
     <ProjectReference Include="..\DependencyRegistration\DependencyRegistration.csproj" />
     <ProjectReference Include="..\RequestHandler\RequestHandler.csproj" />
     <ProjectReference Include="..\ViewModel\ViewModel.csproj" />

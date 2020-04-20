@@ -1,0 +1,18 @@
+﻿@page "/todo"
+@inject HttpClient httpClient
+
+
+<h3>Todo</h3>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetTodoLists();
+    }
+
+    private async Task GetTodoLists()
+    {
+
+    }
+}
