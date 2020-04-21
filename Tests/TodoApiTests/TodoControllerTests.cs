@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using MTech.Tests.Utilities;
+using MTech.TodoApp.CQRS.TodoItem.Commands;
+using MTech.TodoApp.CQRS.TodoItem.Requests;
+using MTech.TodoApp.CQRS.TodoItem.Results;
+using MTech.TodoApp.TodoApi;
+using MTech.Utilities.RequestHandler;
 using System;
 using System.Threading.Tasks;
-using MTech.Tests.Utilities;
-using MTech.RequestHandler;
-using MTech.TodoApp.TodoApi;
-using MTech.TodoApp.TodoItem.Requests;
-using MTech.TodoApp.TodoItem.Results;
-using MTech.TodoApp.TodoItem.Commands;
 using ViewModel = MTech.TodoApp.ViewModel;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using MTech.TodoApp.ViewModel;
 
 namespace MTech.Tests.TodoApiTests
 {
@@ -24,17 +23,18 @@ namespace MTech.Tests.TodoApiTests
         {
             var factory = new ControllerFactory();
 
-            var mockHandler = new Mock<IHandler>();
-
-            mockHandler.Setup(
+            var mockHandler = Mock.Of<IHandler>();
+            Mock.Get(mockHandler).Setup(
                 x => x.HandleCommand<CreateTodoItemCommand, CreateTodoItemCommandResult>(
-                    It.IsAny<CreateTodoItemCommand>()))
+                It.IsAny<CreateTodoItemCommand>()))
                 .ReturnsAsync(new CreateTodoItemCommandResult
                 {
-                    Successfull = true      
+                    Successfull = true
                 });
 
             var toCreate = new ViewModel.TodoItem.CreateView();
+
+            factory.Services.Replace(ServiceDescriptor.Scoped(factory => mockHandler));
 
             var controller = factory.Create<TodoController>();
 
@@ -51,15 +51,18 @@ namespace MTech.Tests.TodoApiTests
         {
             var factory = new ControllerFactory();
 
-            var mockHandler = new Mock<IHandler>();
+            var mockHandler = Mock.Of<IHandler>();
 
-            mockHandler.Setup(
-                x => x.HandleQuery<GetAllTodoItemsRequest<ViewModel.TodoItem.ListView>, TodoItemListViewResult<ViewModel.TodoItem.ListView>>(
-                    It.IsAny<GetAllTodoItemsRequest<ViewModel.TodoItem.ListView>>()))
-                .ReturnsAsync(new TodoItemListViewResult<ViewModel.TodoItem.ListView>
+            Mock.Get(mockHandler).Setup(
+                x => x.HandleQueryAsync<GetAllTodoItemsRequest, TodoItemListViewResult>(
+                    It.IsAny<GetAllTodoItemsRequest>()))
+                .ReturnsAsync(new TodoItemListViewResult
                 {
                     Successfull = true,
                 });
+
+            factory.Services.Replace(
+                ServiceDescriptor.Scoped(factory => mockHandler));
 
             var controller = factory.Create<TodoController>();
 
@@ -73,15 +76,14 @@ namespace MTech.Tests.TodoApiTests
         {
             var factory = new ControllerFactory();
 
-            var mockHandler = new Mock<IHandler>();
+            var mockHandler = Mock.Of<IHandler>();
 
-            mockHandler.Setup(
-                x => x.HandleQuery<GetAllTodoItemsRequest<ViewModel.TodoItem.ListView>, 
-                    TodoItemListViewResult<ViewModel.TodoItem.ListView>>(
-                    It.IsAny<GetAllTodoItemsRequest<ViewModel.TodoItem.ListView>>()))
+            Mock.Get(mockHandler).Setup(
+                x => x.HandleQueryAsync<GetAllTodoItemsRequest, TodoItemListViewResult>(
+                    It.IsAny<GetAllTodoItemsRequest>()))
                 .ThrowsAsync(new Exception());
 
-            factory.Services.Replace(ServiceDescriptor.Transient(x => mockHandler.Object));
+            factory.Services.Replace(ServiceDescriptor.Scoped(factory => mockHandler));
 
             var controller = factory.Create<TodoController>();
 

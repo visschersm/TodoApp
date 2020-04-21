@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>MTech.TodoApp.CQRS</RootNamespace>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-preview.2.20159.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utilities\RequestHandler\RequestHandler.csproj" />
+    <ProjectReference Include="..\..\..\Utilities\ViewModel\ViewModel.csproj" />
+    <ProjectReference Include="..\..\Presentation\ViewModel\TodoApp.ViewModel.csproj" />
+    <ProjectReference Include="..\DataModel.Interfaces\TodoApp.DataModel.Interfaces.csproj" />
+    <ProjectReference Include="..\Entities\TodoApp.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
