@@ -8,6 +8,8 @@ namespace MTech.TodoApp.DataModel.Interfaces
     public interface ITodoContext
     {
         DbSet<TodoItem> TodoItems { get; set; }
+        DbSet<TodoList> TodoLists { get; set; }
+
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default);

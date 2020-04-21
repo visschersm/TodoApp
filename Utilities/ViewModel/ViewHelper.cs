@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -13,12 +14,12 @@ namespace MTech.Utilities.ViewModel
             return source.Select(ViewHelper<TEntity, TView>.SelectExpression);
         }
 
-        //public static IQueryable<TView> ProjectTo<TView>(this IQueryable source)
-        //{
-        //
-        //    var elementType = source.ElementType;
-        //    return source.Select(ViewHelper.SelectExpression<TView>(source.ElementType));
-        //}
+        public static IEnumerable<TView> ProjectTo<TEntity, TView>(this IEnumerable<TEntity> source)
+            where TEntity : class
+            where TView : IViewOf<TEntity>
+        {
+            return source.Select(ViewHelper<TEntity, TView>.SelectExpression.Compile());
+        }
     }
 
     public static class ViewHelper<TEntity, TView>

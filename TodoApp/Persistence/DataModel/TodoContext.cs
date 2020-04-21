@@ -7,6 +7,7 @@ namespace MTech.TodoApp.DataModel
     public class TodoContext : DbContext, ITodoContext
     {
         public DbSet<TodoItem> TodoItems { get; set; } = null!;
+        public DbSet<TodoList> TodoLists { get; set; } = null!;
 
         public TodoContext()
             : base()

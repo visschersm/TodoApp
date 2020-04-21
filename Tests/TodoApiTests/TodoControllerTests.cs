@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MTech.Tests.Utilities;
-using MTech.TodoApp.CQRS.TodoItem.Commands;
-using MTech.TodoApp.CQRS.TodoItem.Requests;
-using MTech.TodoApp.CQRS.TodoItem.Results;
+using MTech.TodoApp.CQRS.Commands;
+using MTech.TodoApp.CQRS.Requests;
+using MTech.TodoApp.CQRS.Results;
 using MTech.TodoApp.TodoApi;
 using MTech.Utilities.RequestHandler;
 using System;
@@ -32,7 +32,7 @@ namespace MTech.Tests.TodoApiTests
                     Successfull = true
                 });
 
-            var toCreate = new ViewModel.TodoItem.CreateView();
+            var toCreate = new ViewModel.TodoList.CreateView();
 
             factory.Services.Replace(ServiceDescriptor.Scoped(factory => mockHandler));
 
@@ -43,7 +43,7 @@ namespace MTech.Tests.TodoApiTests
             Assert.IsInstanceOfType(result, typeof(OkObjectResult));
             Assert.IsInstanceOfType(
                 ((OkObjectResult)result).Value,
-                typeof(CreateTodoItemCommandResult));
+                typeof(CreateTodoListCommandResult));
         }
 
         [TestMethod]
@@ -54,8 +54,8 @@ namespace MTech.Tests.TodoApiTests
             var mockHandler = Mock.Of<IHandler>();
 
             Mock.Get(mockHandler).Setup(
-                x => x.HandleQueryAsync<GetAllTodoItemsRequest, TodoItemListViewResult>(
-                    It.IsAny<GetAllTodoItemsRequest>()))
+                x => x.HandleQuery<GetAllTodoItemsQuery, TodoItemListViewResult>(
+                    It.IsAny<GetAllTodoItemsQuery>()))
                 .ReturnsAsync(new TodoItemListViewResult
                 {
                     Successfull = true,
@@ -79,8 +79,8 @@ namespace MTech.Tests.TodoApiTests
             var mockHandler = Mock.Of<IHandler>();
 
             Mock.Get(mockHandler).Setup(
-                x => x.HandleQueryAsync<GetAllTodoItemsRequest, TodoItemListViewResult>(
-                    It.IsAny<GetAllTodoItemsRequest>()))
+                x => x.HandleQuery<GetAllTodoItemsQuery, TodoItemListViewResult>(
+                    It.IsAny<GetAllTodoItemsQuery>()))
                 .ThrowsAsync(new Exception());
 
             factory.Services.Replace(ServiceDescriptor.Scoped(factory => mockHandler));

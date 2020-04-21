@@ -1,0 +1,110 @@
+﻿@page "/todo"
+@using System.Net.Http
+@using ViewModel = MTech.TodoApp.ViewModel
+@using System.Text.Json
+@using System.Drawing
+@using MTech.Utilities.Extensions
+@inject HttpClient Http
+
+<h3>TodoLists</h3>
+
+@foreach (var list in _todoLists)
+{
+    <div class="card">
+        <div class="card-body">
+            <span class="card-title" style="color:white; background-color:@list.LabelColor; padding:8px">
+                @list.Title
+                <input placeholder="Add new todo" @bind="newTodo" />
+                <button @onclick="@(e => AddTodo(list.Id))">Add Todo</button>
+            </span>
+        </div>
+        <ul class="group" style="display:inline-block">
+            @foreach (var item in list.TodoItems)
+            {
+                <li class="list-group-item">
+                    @item.Title
+                </li>
+            }
+        </ul>
+
+    </div>
+}
+
+<EditForm class="form-group" Model="@newTodoListModel" OnValidSubmit="AddTodoList">
+    <p>
+        <label>
+            Title:
+            <InputText id="title" class="form-control" @bind-Value="newTodoListModel.Title" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Color:
+            <input type="color" class="form-control" @bind-value="newTodoListModel.Color" />
+        </label>
+    </p>
+    <button type="submit">Add new List</button>
+</EditForm>
+
+@code {
+    private IList<ViewModel.TodoList.ListView> _todoLists = new List<ViewModel.TodoList.ListView>();
+    private string newTodo = "";
+    private ViewModel.TodoList.CreateView newTodoListModel = new ViewModel.TodoList.CreateView();
+
+    private static readonly string baseUrl = "https://localhost:5001/";
+    private static readonly string todoUrl = baseUrl + "todo";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateTodoList();
+    }
+
+    private async Task UpdateTodoList()
+    {
+        var response = await Http.GetAsync(todoUrl);
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            var str = await response.Content.ReadAsStringAsync();
+            _todoLists = await JsonSerializer.DeserializeAsync<IList<ViewModel.TodoList.ListView>>(responseStream, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+        }
+    }
+
+    private async Task AddTodo(int parentId)
+    {
+        if (string.IsNullOrWhiteSpace(newTodo))
+            return;
+
+        var toCreate = new ViewModel.TodoItem.CreateView
+        {
+            Title = newTodo
+        };
+
+        var json = JsonSerializer.Serialize(toCreate);
+        var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        var response = await Http.PostAsync($"https://localhost:5001/todo/{parentId}", data);
+        string result = await response.Content.ReadAsStringAsync();
+
+        newTodo = "";
+
+        await UpdateTodoList();
+    }
+
+    private async Task AddTodoList()
+    {
+        if (newTodoListModel == null)
+            return;
+
+        var json = JsonSerializer.Serialize(newTodoListModel);
+        var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        var response = await Http.PostAsync("https://localhost:5001/todo", data);
+        string result = await response.Content.ReadAsStringAsync();
+
+        newTodoListModel = new ViewModel.TodoList.CreateView { };
+
+        await UpdateTodoList();
+    }
+}

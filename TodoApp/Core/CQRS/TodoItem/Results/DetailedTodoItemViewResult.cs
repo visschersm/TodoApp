@@ -1,7 +1,7 @@
 using MTech.TodoApp.ViewModel.TodoItem;
 using MTech.Utilities.RequestHandler;
 
-namespace MTech.TodoApp.CQRS.TodoItem.Results
+namespace MTech.TodoApp.CQRS.Results
 {
     public class DetailedTodoItemViewResult : IQueryResult
     {

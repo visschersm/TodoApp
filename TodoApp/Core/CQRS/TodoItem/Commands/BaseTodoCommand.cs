@@ -1,6 +1,6 @@
 ﻿using MTech.Utilities.RequestHandler;
 
-namespace MTech.TodoApp.CQRS.TodoItem.Commands
+namespace MTech.TodoApp.CQRS.Commands
 {
     public abstract class BaseTodoCommand : ICommandRequest
     {

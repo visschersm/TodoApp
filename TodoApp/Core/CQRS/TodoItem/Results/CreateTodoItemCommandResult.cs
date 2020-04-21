@@ -1,6 +1,6 @@
 using MTech.Utilities.RequestHandler;
 
-namespace MTech.TodoApp.CQRS.TodoItem.Results
+namespace MTech.TodoApp.CQRS.Results
 {
     public class CreateTodoItemCommandResult : ICommandResult
     {

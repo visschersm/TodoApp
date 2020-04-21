@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using MTech.TodoApp.CQRS.TodoItem.Commands;
+using MTech.TodoApp.CQRS.Commands;
 using MTech.TodoApp.DataModel;
 using MTech.TodoApp.DataModel.Interfaces;
 using MTech.Utilities.RequestHandler;
