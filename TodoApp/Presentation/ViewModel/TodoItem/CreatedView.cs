@@ -4,7 +4,7 @@ namespace MTech.TodoApp.ViewModel.TodoItem
 {
     public class CreatedView : IViewOf<Entities.TodoItem>
     {
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
         static CreatedView()
         {

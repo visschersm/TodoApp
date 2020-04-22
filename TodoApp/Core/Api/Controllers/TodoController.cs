@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MTech.TodoApp.CQRS.Commands;
 using MTech.TodoApp.CQRS.Queries;
-using MTech.TodoApp.CQRS.Requests;
 using MTech.TodoApp.CQRS.Results;
 using MTech.Utilities.RequestHandler;
 using System.Threading.Tasks;
@@ -62,14 +61,15 @@ namespace MTech.TodoApp.TodoApi
             return Ok(result.Data);
         }
 
+
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(ViewModel.TodoItem.ListView[]), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetTodoItems(int id)
+        public async Task<IActionResult> GetTodoListById(int id)
         {
-            var result = await _handler.HandleQuery<GetAllTodoItemsQuery, TodoItemListViewResult>(
-                new GetAllTodoItemsQuery(id));
+            var result = await _handler.HandleQuery<GetTodoListByIdQuery, GetTodoListByIdQueryResult>(
+                new GetTodoListByIdQuery(id));
 
             if (!result.Successfull)
                 return StatusCode(StatusCodes.Status500InternalServerError);

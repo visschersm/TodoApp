@@ -2,6 +2,7 @@
 using MTech.TodoApp.DataModel.Interfaces;
 using MTech.TodoApp.ViewModel.TodoList;
 using MTech.Utilities.RequestHandler;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace MTech.TodoApp.CQRS.Commands
@@ -26,10 +27,13 @@ namespace MTech.TodoApp.CQRS.Commands
 
             public async Task<CreateTodoListCommandResult> Handle(CreateTodoListCommand request)
             {
+                var color = System.Drawing.ColorTranslator.FromHtml(request._toCreate.LabelColor);
+                color = Color.FromArgb(color.R, color.G, color.B);
+
                 var newEntity = _context.TodoLists.Add(new Entities.TodoList
                 {
                     Title = request._toCreate.Title,
-                    LabelColor = System.Drawing.ColorTranslator.FromHtml(request._toCreate.Color)
+                    LabelColor = color
                 }).Entity;
 
                 await _context.SaveChangesAsync();

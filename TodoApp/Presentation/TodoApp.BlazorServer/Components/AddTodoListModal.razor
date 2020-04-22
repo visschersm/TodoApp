@@ -1,0 +1,46 @@
+﻿@using System.Text.Json
+@using System.Net.Http
+@inject HttpClient Http
+
+<EditForm class="form-group" Model="@NewTodoListModel" OnValidSubmit="AddTodoList">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <p>
+        <label>
+            Title:
+            <InputText @bind-Value="NewTodoListModel.Title" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Color:
+            <input type="color" class="form-control" @bind-value="NewTodoListModel.LabelColor" />
+        </label>
+    </p>
+    <button type="submit">Add new List</button>
+</EditForm>
+
+@code {
+    private ViewModel.TodoList.CreateView NewTodoListModel { get; set; } = new ViewModel.TodoList.CreateView();
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+
+    protected override void OnInitialized() => BlazoredModal.SetTitle("Create new TodoList");
+
+    void SubmitForm() => BlazoredModal.Close(ModalResult.Ok(NewTodoListModel));
+    void Cancel() => BlazoredModal.Cancel();
+
+    private async Task AddTodoList()
+    {
+        if (NewTodoListModel == null)
+            return;
+
+        var json = JsonSerializer.Serialize(NewTodoListModel);
+        var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        var response = await Http.PostAsync("https://localhost:5001/todo", data);
+        string result = await response.Content.ReadAsStringAsync();
+
+        NewTodoListModel = new ViewModel.TodoList.CreateView { };
+
+        SubmitForm();
+    }
+}

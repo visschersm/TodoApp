@@ -6,9 +6,10 @@ namespace MTech.TodoApp.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; } = null!;
-        public int Priority { get; set; }
+        public Priority Priority { get; set; }
         public bool IsDone { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime DueDate { get; set; }
         public int ParentId { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

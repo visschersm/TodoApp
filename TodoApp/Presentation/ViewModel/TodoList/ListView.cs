@@ -17,8 +17,8 @@ namespace MTech.TodoApp.ViewModel.TodoList
         }
 
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string LabelColor { get; set; }
-        public IEnumerable<TodoItem.ListView> TodoItems { get; set; }
+        public string Title { get; set; } = null!;
+        public string LabelColor { get; set; } = "#000000";
+        public IEnumerable<TodoItem.ListView> TodoItems { get; set; } = new List<TodoItem.ListView>();
     }
 }

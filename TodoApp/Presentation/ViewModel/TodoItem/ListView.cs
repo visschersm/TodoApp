@@ -12,12 +12,12 @@ namespace MTech.TodoApp.ViewModel.TodoItem
                 Title = x.Title,
                 Priority = x.Priority,
                 IsDone = x.IsDone,
-                EndDate = x.EndDate
+                EndDate = x.DueDate
             };
         }
 
-        public string Title { get; set; }
-        public int Priority { get; set; }
+        public string Title { get; set; } = null!;
+        public Priority Priority { get; set; }
         public bool IsDone { get; set; }
         public DateTime EndDate { get; set; }
     }
