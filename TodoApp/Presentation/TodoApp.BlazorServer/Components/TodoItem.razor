@@ -1,9 +1,12 @@
 ﻿<li class="list-group-item">
-    <input type="checkbox" @bind="TodoItemModel.IsDone">
-    @TodoItemModel.Title
+    <div class="custom-checkbox">
+        <input type="checkbox" id="cbx" @bind="TodoItemModel.IsDone">
+        <label for="cbx">@TodoItemModel.Title</label>
+    </div>
 </li>
 
 @code {
     [Parameter]
     public ViewModel.TodoItem.ListView TodoItemModel { get; set; } = new ViewModel.TodoItem.ListView();
 }
+

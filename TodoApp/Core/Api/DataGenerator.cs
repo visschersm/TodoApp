@@ -17,7 +17,7 @@ namespace MTech.TodoApp.Api
                 new Entities.TodoList
                 {
                     Title = "Test List - Shopping",
-                    LabelColor = Color.AliceBlue,
+                    LabelColor = Color.CornflowerBlue,
                     TodoItems = new Entities.TodoItem[]
                     {
                         new Entities.TodoItem
@@ -35,7 +35,7 @@ namespace MTech.TodoApp.Api
                 new Entities.TodoList
                 {
                     Title = "Test List - Development",
-                    LabelColor = Color.PeachPuff,
+                    LabelColor = Color.Chartreuse,
                     TodoItems = new Entities.TodoItem[]
                     {
                         new Entities.TodoItem
