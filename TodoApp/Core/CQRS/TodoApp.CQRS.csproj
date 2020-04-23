@@ -16,6 +16,7 @@
     <ProjectReference Include="..\..\Presentation\ViewModel\TodoApp.ViewModel.csproj" />
     <ProjectReference Include="..\DataModel.Interfaces\TodoApp.DataModel.Interfaces.csproj" />
     <ProjectReference Include="..\Entities\TodoApp.Entities.csproj" />
+    <ProjectReference Include="..\Domain\TodoApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

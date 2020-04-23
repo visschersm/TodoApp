@@ -46,11 +46,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.DataModel", "TodoAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.DependencyRegistration", "TodoApp\Core\DependencyRegistration\TodoApp.DependencyRegistration.csproj", "{35500D36-5F48-4383-B0DC-8B0A1A5DD77D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.BlazorServer", "TodoApp\Presentation\TodoApp.BlazorServer\TodoApp.BlazorServer.csproj", "{526F68D8-CF43-404F-B52D-CEEB1EF23986}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.BlazorServer", "TodoApp\Presentation\BlazorServer\TodoApp.BlazorServer.csproj", "{526F68D8-CF43-404F-B52D-CEEB1EF23986}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensions", "Utilities\Extensions\Extensions.csproj", "{71648DC9-6291-46FD-AE6F-8DB641CCEA4D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.Domain", "Core\TodoApp.Domain\TodoApp.Domain.csproj", "{560A19F6-7BCE-45F9-A76B-704621A49B9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.Domain", "TodoApp\Core\Domain\TodoApp.Domain.csproj", "{560A19F6-7BCE-45F9-A76B-704621A49B9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
