@@ -13,9 +13,14 @@ namespace MTech.DependencyRegistration
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            //services.AddDbContext<TodoContext>(options =>
+            //{
+            //    options.UseInMemoryDatabase("TodoContext");
+            //});
+
             services.AddDbContext<TodoContext>(options =>
             {
-                options.UseInMemoryDatabase("TodoContext");
+                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TodoContext;Trusted_Connection=True;MultipleActiveResultSets=true");
             });
 
             services.AddScoped<ITodoContext>(provider => provider.GetService<TodoContext>());
@@ -30,11 +35,13 @@ namespace MTech.DependencyRegistration
 
         public static void AddCommandQueryHandlers(this IServiceCollection services, Type handlerInterface)
         {
-            var types = typeof(BaseTodoCommand).Assembly.GetTypes();
-            var handlers = types.Where(x => x.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface)).ToArray();
+            var types = typeof(BaseTodoCommand).Assembly.GetTypes()
+                .Where(x =>
+                    x.GetInterfaces()
+                    .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface))
+                .ToArray();
 
-            //services.AddScoped(handler.GetInterfaces().First(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface), handler);
-            foreach (var handler in handlers)
+            foreach (var handler in types)
             {
                 var genericType = handler.GetInterfaces().First(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface);
                 services.AddScoped(genericType, handler);
