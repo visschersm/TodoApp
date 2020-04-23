@@ -1,5 +1,4 @@
--	TodoItem Priority
--	CreatedDate / EndDate := When it should be done
+-	CreatedDate / DueDate := When it should be done
 -	Notes/Description
 -	How long should it take?
 -	Versus actual time
