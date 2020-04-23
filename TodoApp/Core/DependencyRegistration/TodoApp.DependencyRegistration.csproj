@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Utilities\RequestHandler\RequestHandler.csproj" />
-    <ProjectReference Include="..\..\Persistence\DataModel\DataModel.csproj" />
+    <ProjectReference Include="..\..\Persistence\DataModel\TodoApp.DataModel.csproj" />
     <ProjectReference Include="..\CQRS\TodoApp.CQRS.csproj" />
   </ItemGroup>
 
