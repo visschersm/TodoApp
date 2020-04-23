@@ -12,6 +12,9 @@ namespace MTech.TodoApp.Api
         {
             using var context = new TodoContext(serviceProvider.GetRequiredService<DbContextOptions<TodoContext>>());
 
+            if (!context.Database.IsInMemory())
+                return;
+
             context.TodoLists.AddRange(new Entities.TodoList[]
             {
                 new Entities.TodoList
