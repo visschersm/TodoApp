@@ -28,6 +28,12 @@
             <InputDate @bind-Value="NewTodoItem.DueDate" />
         </label>
     </p>
+    <p>
+        <label>
+            Note:
+            <InputTextArea @bind-Value="NewTodoItem.Note" />
+        </label>
+    </p>
     <button class="btn btn-primary" type="submit">Add</button>
     <button @onclick="Cancel" class="btn btn-secondary">Cancel</button>
 </EditForm>
