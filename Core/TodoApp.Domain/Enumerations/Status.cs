@@ -1,4 +1,4 @@
-﻿namespace MTech.TodoApp.Enumerations
+﻿namespace MTech.TodoApp
 {
     public enum Status
     {
