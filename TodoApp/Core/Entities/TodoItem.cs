@@ -1,5 +1,4 @@
-﻿using MTech.TodoApp.Enumerations;
-using System;
+﻿using System;
 
 namespace MTech.TodoApp.Entities
 {
