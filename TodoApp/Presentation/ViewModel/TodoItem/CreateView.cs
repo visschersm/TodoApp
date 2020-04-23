@@ -11,5 +11,6 @@ namespace MTech.TodoApp.ViewModel.TodoItem
 
         public Priority Priority { get; set; } = Priority.None;
         public DateTime DueDate { get; set; }
+        public string? Note { get; set; }
     }
 }
