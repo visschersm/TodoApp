@@ -42,7 +42,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUtilities", "Tests\Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.DataModel.Interfaces", "TodoApp\Core\DataModel.Interfaces\TodoApp.DataModel.Interfaces.csproj", "{6B16C3CE-4D98-4C0E-8C11-1912776DF74F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataModel", "TodoApp\Persistence\DataModel\DataModel.csproj", "{F83E5B6C-4802-4703-8A45-32F19655A327}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.DataModel", "TodoApp\Persistence\DataModel\TodoApp.DataModel.csproj", "{F83E5B6C-4802-4703-8A45-32F19655A327}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.DependencyRegistration", "TodoApp\Core\DependencyRegistration\TodoApp.DependencyRegistration.csproj", "{35500D36-5F48-4383-B0DC-8B0A1A5DD77D}"
 EndProject
