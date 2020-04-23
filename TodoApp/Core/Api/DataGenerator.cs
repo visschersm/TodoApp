@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MTech.TodoApp.DataModel;
+using MTech.TodoApp.Enumerations;
 using System;
 using System.Drawing;
 
@@ -26,12 +27,12 @@ namespace MTech.TodoApp.Api
                         new Entities.TodoItem
                         {
                             Title = "Milk",
-                            IsDone = false,
+                            Status = Status.Planned
                         },
                         new Entities.TodoItem
                         {
                             Title = "Bread",
-                            IsDone = true
+                            Status = Status.Done
                         }
                     }
                 },
@@ -44,7 +45,7 @@ namespace MTech.TodoApp.Api
                         new Entities.TodoItem
                         {
                             Title = "Learn Blazor",
-                            IsDone = false,
+                            Status = Status.Busy,
                             CreatedDate = DateTime.Today.AddDays(-5),
                             DueDate = DateTime.Today.AddDays(1),
                             Priority = Priority.Highest,
@@ -52,7 +53,7 @@ namespace MTech.TodoApp.Api
                         new Entities.TodoItem
                         {
                             Title = "Architecture",
-                            IsDone = true,
+                            Status = Status.Done,
                             CreatedDate = DateTime.Today,
                             DueDate = DateTime.Today.AddDays(7),
                             Priority = Priority.High
@@ -60,7 +61,7 @@ namespace MTech.TodoApp.Api
                         new Entities.TodoItem
                         {
                             Title = "Learn Vue",
-                            IsDone = false,
+                            Status = Status.Planned,
                             CreatedDate = DateTime.Today,
                             DueDate = DateTime.Today.AddDays(3),
                             Priority = Priority.Low
