@@ -1,4 +1,5 @@
-﻿using MTech.Utilities.ViewModel;
+﻿using MTech.TodoApp.Enumerations;
+using MTech.Utilities.ViewModel;
 using System;
 
 namespace MTech.TodoApp.ViewModel.TodoItem
@@ -11,7 +12,7 @@ namespace MTech.TodoApp.ViewModel.TodoItem
             {
                 Title = x.Title,
                 Priority = x.Priority,
-                IsDone = x.IsDone,
+                IsDone = x.Status == Status.Done,
                 EndDate = x.DueDate
             };
         }
