@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MTech.TodoApp.DataModel;
-using MTech.TodoApp.Enumerations;
 using System;
 using System.Drawing;
 
