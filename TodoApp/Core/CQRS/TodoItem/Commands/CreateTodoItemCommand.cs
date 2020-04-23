@@ -33,7 +33,9 @@ namespace MTech.TodoApp.CQRS.Commands
                 var toCreate = new Entities.TodoItem
                 {
                     ParentId = request.ParentId,
-                    Title = request.CreateView.Title
+                    Title = request.CreateView.Title,
+                    Note = request.CreateView.Note,
+                    DueDate = request.CreateView.DueDate
                 };
 
                 var list = _context.TodoLists.SingleOrDefault(x => x.Id == request.ParentId);
