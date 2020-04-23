@@ -61,12 +61,20 @@ namespace MTech.TodoApp.TodoApi
             return Ok(result.Data);
         }
 
-
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(typeof(ViewModel.TodoItem.ListView[]), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ViewModel.TodoList.DetailedView), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetTodoListById(int id)
+        {
+            return StatusCode(StatusCodes.Status501NotImplemented);
+        }
+
+        [HttpGet]
+        [Route("{id}/items")]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ViewModel.TodoItem.ListView[]), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetTodoListItemsById(int id)
         {
             var result = await _handler.HandleQuery<GetTodoListByIdQuery, GetTodoListByIdQueryResult>(
                 new GetTodoListByIdQuery(id));
@@ -75,6 +83,36 @@ namespace MTech.TodoApp.TodoApi
                 return StatusCode(StatusCodes.Status500InternalServerError);
 
             return Ok(result.Data);
+        }
+
+        [HttpGet]
+        [Route("{parentId}/{id}")]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ViewModel.TodoItem.DetailedView), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetTodoItemById(int id)
+        {
+            var result = await _handler.HandleQuery<GetTodoItemByIdQuery, GetTodoItemByIdQueryResult>(
+                new GetTodoItemByIdQuery(id));
+
+            if (!result.Successfull)
+                return StatusCode(StatusCodes.Status500InternalServerError);
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [Route("{parentId}/{id}")]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ViewModel.TodoItem.DetailedView), StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateTodoItem(int id, [FromBody]ViewModel.TodoItem.UpdateView toUpdate)
+        {
+            var result = await _handler.HandleCommand<UpdateTodoItemCommand, UpdateTodoItemCommandResult>(
+                new UpdateTodoItemCommand(id, toUpdate));
+
+            if (!result.Successfull)
+                return StatusCode(StatusCodes.Status500InternalServerError);
+
+            return Ok(result);
         }
     }
 }
