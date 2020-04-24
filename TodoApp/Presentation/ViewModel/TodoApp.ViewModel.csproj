@@ -10,6 +10,7 @@
     <ProjectReference Include="..\..\..\Utilities\Extensions\Extensions.csproj" />
     <ProjectReference Include="..\..\..\Utilities\ViewModel\ViewModel.csproj" />
     <ProjectReference Include="..\..\Core\Entities\TodoApp.Entities.csproj" />
+    <ProjectReference Include="..\..\Core\Domain\TodoApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>
