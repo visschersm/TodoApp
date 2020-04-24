@@ -1,0 +1,17 @@
+﻿@using System.Net.Http
+@using ViewModel = MTech.TodoApp.ViewModel
+@using System.Text.Json
+@inject HttpClient Http
+
+<div type="button" class="list-group-item list-group-item-action">
+    <div class="custom-checkbox">
+        <input type="checkbox" id="cbx" @bind="TodoItemModel.IsDone">
+        <label for="cbx">@TodoItemModel.Title</label>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public ViewModel.TodoItem.ListView TodoItemModel { get; set; } = new ViewModel.TodoItem.ListView();
+}
+

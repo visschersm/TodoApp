@@ -54,7 +54,7 @@ namespace MTech.TodoApp.CQRS.Commands
                     {
                         Title = item.Title,
                         Priority = item.Priority,
-                        Status = item.TodoStatus,
+                        Status = item.Status,
                         DueDate = item.DueDate,
                     }
                 };

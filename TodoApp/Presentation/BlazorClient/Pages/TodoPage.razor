@@ -1,0 +1,40 @@
+﻿@page "/todo"
+@using System.Net.Http
+@using ViewModel = MTech.TodoApp.ViewModel
+@using System.Text.Json
+@inject HttpClient Http
+
+<h3>TodoPage</h3>
+
+<h3>TodoLists</h3>
+
+@foreach (var list in TodoLists)
+{
+    <TodoList TodoListModel="list" />
+}
+
+@code {
+    private IList<ViewModel.TodoList.ListView> TodoLists { get; set; } = new List<ViewModel.TodoList.ListView>();
+
+    private static readonly string baseUrl = "https://localhost:5001/";
+    private static readonly string todoUrl = baseUrl + "todo";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateTodoList();
+    }
+
+    private async Task UpdateTodoList()
+    {
+        var response = await Http.GetAsync(todoUrl);
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+
+            TodoLists = await JsonSerializer.DeserializeAsync<IList<ViewModel.TodoList.ListView>>(responseStream, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+        }
+    }
+}

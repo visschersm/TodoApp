@@ -1,0 +1,21 @@
+﻿@using System.Net.Http
+@using ViewModel = MTech.TodoApp.ViewModel
+@using System.Text.Json
+@inject HttpClient Http
+
+<div class="card" style="width: 18rem; margin:8px">
+    <div class="card-header" style="color:white; background-color:@TodoListModel.LabelColor;">
+        @TodoListModel.Title
+    </div>
+    <ul class="list-group list-group-flush">
+        @foreach (var item in TodoListModel.TodoItems)
+        {
+            <TodoItem TodoItemModel="item" />
+        }
+    </ul>
+</div>
+
+@code {
+    [Parameter]
+    public ViewModel.TodoList.ListView TodoListModel { get; set; }
+}
