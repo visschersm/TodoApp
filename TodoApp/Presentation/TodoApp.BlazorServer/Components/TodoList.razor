@@ -11,7 +11,7 @@
     <ul class="list-group list-group-flush">
         @foreach (var item in TodoListModel.TodoItems)
         {
-            <TodoItem TodoItemModel="item" />
+            <TodoItem TodoItemModel="item" OnUpdateTodoList="OnUpdateTodoList" />
         }
     </ul>
     <div class="card-body">
@@ -34,20 +34,11 @@
         var messageForm = Modal.Show<Components.AddTodoItemModal>("Add TodoItem", parameters);
         var result = await messageForm.Result;
 
-        await UpdateTodoList();
-    }
-
-    private async Task UpdateTodoList()
-    {
-        var response = await Http.GetAsync($"{todoUrl}/{TodoListModel.Id}");
-        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        if (!result.Cancelled)
         {
-            using var responseStream = await response.Content.ReadAsStreamAsync();
-
-            TodoListModel = await JsonSerializer.DeserializeAsync<ViewModel.TodoList.ListView>(responseStream, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
+            await OnUpdateTodoList.InvokeAsync(this);
         }
     }
+
+    [Parameter] public EventCallback OnUpdateTodoList { get; set; }
 }

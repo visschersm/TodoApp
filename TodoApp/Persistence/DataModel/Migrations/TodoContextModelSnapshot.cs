@@ -15,7 +15,7 @@ namespace MTech.TodoApp.DataModel.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.0-preview.2.20159.4")
+                .HasAnnotation("ProductVersion", "5.0.0-preview.3.20181.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -35,10 +35,16 @@ namespace MTech.TodoApp.DataModel.Migrations
                     b.Property<bool>("IsDone")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
 
                     b.Property<int>("Priority")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -55,6 +61,8 @@ namespace MTech.TodoApp.DataModel.Migrations
                     b.ToTable("TodoItems");
 
                     b.HasCheckConstraint("CK_TodoItems_Priority_Enum_Constraint", "[Priority] IN(0, 1, 2, 3, 4, 5)");
+
+                    b.HasCheckConstraint("CK_TodoItems_Status_Enum_Constraint", "[Status] IN(0, 1, 2)");
                 });
 
             modelBuilder.Entity("MTech.TodoApp.Entities.TodoList", b =>

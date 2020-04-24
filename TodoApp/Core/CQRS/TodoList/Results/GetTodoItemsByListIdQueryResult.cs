@@ -3,9 +3,9 @@ using MTech.Utilities.RequestHandler;
 
 namespace MTech.TodoApp.CQRS.Results
 {
-    public class GetTodoItemByIdQueryResult : IQueryResult
+    public class GetTodoItemsByListIdQueryResult : IQueryResult
     {
         public bool Successfull { get; set; }
-        public DetailedView Data { get; set; } = null!;
+        public ListView[] Data { get; internal set; } = null!;
     }
 }

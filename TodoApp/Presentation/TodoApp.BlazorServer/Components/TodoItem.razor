@@ -20,7 +20,7 @@
 
     private async Task OpenTodoItem()
     {
-        var response = await Http.GetAsync($"{todoUrl}/{TodoItemModel.ParentId}/{TodoItemModel.Id}");
+        var response = await Http.GetAsync($"{todoUrl}/{TodoItemModel.ParentId}/Items/{TodoItemModel.Id}");
         if (response.StatusCode == System.Net.HttpStatusCode.OK)
         {
             using var responseStream = await response.Content.ReadAsStreamAsync();
@@ -30,6 +30,8 @@
             });
 
             var parameters = new ModalParameters();
+            parameters.Add(nameof(Components.EditTodoItemModal.ParentId), TodoItemModel.ParentId);
+            parameters.Add(nameof(Components.EditTodoItemModal.Id), TodoItemModel.Id);
             parameters.Add(nameof(Components.EditTodoItemModal.EditTodoItemModel),
                 new ViewModel.TodoItem.UpdateView
                 {
@@ -41,8 +43,14 @@
 
             var messageForm = Modal.Show<Components.EditTodoItemModal>("Edit TodoItem", parameters);
             var result = await messageForm.Result;
+
+            if (!result.Cancelled)
+            {
+                await OnUpdateTodoList.InvokeAsync(this);
+            }
         }
     }
 
+    [Parameter] public EventCallback OnUpdateTodoList { get; set; }
 }
 

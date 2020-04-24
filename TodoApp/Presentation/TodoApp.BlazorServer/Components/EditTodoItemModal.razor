@@ -45,7 +45,7 @@
     [Parameter]
     public ViewModel.TodoItem.UpdateView EditTodoItemModel { get; set; }
 
-    private ViewModel.TodoItem.DetailedView _result;
+    private ViewModel.TodoItem.ListView _result;
 
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
 
@@ -63,13 +63,13 @@
 
         var json = JsonSerializer.Serialize(EditTodoItemModel);
         var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-        var response = await Http.PutAsync($"https://localhost:5001/todo/{ParentId}/{Id}", data);
+        var response = await Http.PutAsync($"https://localhost:5001/todo/{ParentId}/Items/{Id}", data);
 
         if (response.StatusCode == System.Net.HttpStatusCode.OK)
         {
             using var responseStream = await response.Content.ReadAsStreamAsync();
 
-            _result = await JsonSerializer.DeserializeAsync<ViewModel.TodoItem.DetailedView>(responseStream, new JsonSerializerOptions
+            _result = await JsonSerializer.DeserializeAsync<ViewModel.TodoItem.ListView>(responseStream, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });

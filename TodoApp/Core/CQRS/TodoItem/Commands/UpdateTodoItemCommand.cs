@@ -9,12 +9,16 @@ namespace MTech.TodoApp.CQRS.Commands
 {
     public class UpdateTodoItemCommand : ICommandRequest
     {
-        public int Id { get; set; }
+        private readonly int _parentId;
+        private readonly int _id;
+
         public ViewModel.TodoItem.UpdateView UpdateView { get; set; }
 
-        public UpdateTodoItemCommand(int id, ViewModel.TodoItem.UpdateView updateView)
+        public UpdateTodoItemCommand(int parentId, int id, ViewModel.TodoItem.UpdateView updateView)
         {
-            Id = id;
+            _parentId = parentId;
+            _id = id;
+
             UpdateView = updateView;
         }
 
@@ -29,13 +33,17 @@ namespace MTech.TodoApp.CQRS.Commands
 
             public async Task<UpdateTodoItemCommandResult> Handle(UpdateTodoItemCommand request)
             {
-                var item = await _context.TodoItems.Where(x => x.Id == request.Id)
+                var item = await _context.TodoLists
+                    .Where(x => x.Id == request._parentId)
+                    .SelectMany(x => x.TodoItems)
+                    .Where(x => x.Id == request._id)
                     .SingleOrDefaultAsync();
 
                 item.Title = request.UpdateView.Title;
                 item.Priority = request.UpdateView.Priority;
                 item.DueDate = request.UpdateView.DueDate;
                 item.Note = request.UpdateView.Note;
+                //item.Status = request.UpdateView.Status;
 
                 await _context.SaveChangesAsync();
 

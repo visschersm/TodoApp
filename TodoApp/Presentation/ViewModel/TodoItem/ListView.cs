@@ -18,23 +18,23 @@ namespace MTech.TodoApp.ViewModel.TodoItem
             };
         }
 
-        public int Id { get; internal set; }
-        public int ParentId { get; internal set; }
+        public int Id { get; set; }
+        public int ParentId { get; set; }
         public string Title { get; set; } = null!;
         public Priority Priority { get; set; }
         public bool IsDone
         {
             get
             {
-                return Status == Status.Done;
+                return Status == TodoStatus.Done;
             }
             set
             {
-                Status = value ? Status.Done : Status;
+                Status = value ? TodoStatus.Done : Status;
 
             }
         }
-        public Status Status { get; set; }
+        public TodoStatus Status { get; set; }
         public DateTime DueDate { get; set; }
     }
 }

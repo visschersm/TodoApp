@@ -13,15 +13,15 @@ namespace MTech.DependencyRegistration
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddDbContext<TodoContext>(options =>
-            {
-                options.UseInMemoryDatabase("TodoContext");
-            });
-
             //services.AddDbContext<TodoContext>(options =>
             //{
-            //    options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TodoContext;Trusted_Connection=True;MultipleActiveResultSets=true");
+            //    options.UseInMemoryDatabase("TodoContext");
             //});
+
+            services.AddDbContext<TodoContext>(options =>
+            {
+                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TodoContext;Trusted_Connection=True;MultipleActiveResultSets=true");
+            });
 
             services.AddScoped<ITodoContext>(provider => provider.GetService<TodoContext>());
 

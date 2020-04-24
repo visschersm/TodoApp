@@ -1,4 +1,5 @@
 ﻿using MTech.Utilities.ViewModel;
+using System.Collections.Generic;
 
 namespace MTech.TodoApp.ViewModel.TodoList
 {
@@ -8,8 +9,16 @@ namespace MTech.TodoApp.ViewModel.TodoList
         {
             ViewHelper<Entities.TodoList, DetailedView>.SelectExpression = x => new DetailedView
             {
-
+                Id = x.Id,
+                LabelColor = System.Drawing.ColorTranslator.ToHtml(x.LabelColor),
+                Title = x.Title,
+                TodoItems = x.TodoItems.ProjectTo<Entities.TodoItem, TodoItem.ListView>(),
             };
         }
+
+        public int Id { get; set; }
+        public string LabelColor { get; set; } = "#000000";
+        public string Title { get; set; } = "";
+        public IEnumerable<TodoItem.ListView> TodoItems { get; set; } = new List<TodoItem.ListView>();
     }
 }

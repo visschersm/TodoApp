@@ -23,10 +23,15 @@ namespace MTech.TodoApp.DataModel
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseInMemoryDatabase("TodoContext");
-            }
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TodoContext;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+            //if (!optionsBuilder.IsConfigured)
+            //{
+            //    optionsBuilder.UseInMemoryDatabase("TodoContext");
+            //}
+
+            //base.OnConfiguring(optionsBuilder);
         }
+
     }
 }

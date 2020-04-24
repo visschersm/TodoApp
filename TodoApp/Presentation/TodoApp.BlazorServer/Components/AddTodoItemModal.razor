@@ -60,8 +60,11 @@
 
         var json = JsonSerializer.Serialize(NewTodoItem);
         var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-        var response = await Http.PostAsync($"https://localhost:5001/todo/{ParentId}", data);
+        var response = await Http.PostAsync($"https://localhost:5001/todo/{ParentId}/Items", data);
 
-        SubmitForm();
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            SubmitForm();
+        }
     }
 }

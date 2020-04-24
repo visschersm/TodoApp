@@ -5,6 +5,6 @@ namespace MTech.TodoApp.CQRS.Results
     public class GetTodoListByIdQueryResult : IQueryResult
     {
         public bool Successfull { get; set; }
-        public ViewModel.TodoList.ListView Data { get; set; } = null!;
+        public ViewModel.TodoList.DetailedView Data { get; set; } = null!;
     }
 }

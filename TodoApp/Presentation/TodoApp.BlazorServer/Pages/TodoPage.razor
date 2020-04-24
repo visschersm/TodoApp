@@ -11,7 +11,7 @@
 
 @foreach (var list in TodoLists)
 {
-    <TodoList TodoListModel="list" />
+    <TodoList TodoListModel="list" OnUpdateTodoList="UpdateTodoList" />
 }
 
 @code {

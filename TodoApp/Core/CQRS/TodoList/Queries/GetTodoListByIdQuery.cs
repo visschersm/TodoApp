@@ -30,7 +30,7 @@ namespace MTech.TodoApp.CQRS.Queries
             {
                 var result = await _context.TodoLists.AsNoTracking()
                     .Where(x => x.Id == request.Id)
-                    .ProjectTo<Entities.TodoList, ViewModel.TodoList.ListView>()
+                    .ProjectTo<Entities.TodoList, ViewModel.TodoList.DetailedView>()
                     .SingleOrDefaultAsync();
 
                 return new GetTodoListByIdQueryResult

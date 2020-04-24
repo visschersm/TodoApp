@@ -11,10 +11,10 @@ namespace MTech.TodoApp.DataModel.Migrations
                 name: "TodoLists",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: false),
-                    Argb = table.Column<int>(nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Argb = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,20 +25,23 @@ namespace MTech.TodoApp.DataModel.Migrations
                 name: "TodoItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: false),
-                    Priority = table.Column<int>(nullable: false),
-                    IsDone = table.Column<bool>(nullable: false),
-                    DueDate = table.Column<DateTime>(nullable: false),
-                    ParentId = table.Column<int>(nullable: false),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    TodoListId = table.Column<int>(nullable: true)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Priority = table.Column<int>(type: "int", nullable: false),
+                    IsDone = table.Column<bool>(type: "bit", nullable: false),
+                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ParentId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    TodoListId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TodoItems", x => x.Id);
                     table.CheckConstraint("CK_TodoItems_Priority_Enum_Constraint", "[Priority] IN(0, 1, 2, 3, 4, 5)");
+                    table.CheckConstraint("CK_TodoItems_Status_Enum_Constraint", "[Status] IN(0, 1, 2)");
                     table.ForeignKey(
                         name: "FK_TodoItems_TodoLists_TodoListId",
                         column: x => x.TodoListId,
