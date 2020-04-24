@@ -1,6 +1,6 @@
 ﻿namespace MTech.TodoApp
 {
-    public enum Status
+    public enum TodoStatus
     {
         Planned = 0,
         Busy = 1,
