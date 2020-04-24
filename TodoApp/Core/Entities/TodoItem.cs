@@ -12,6 +12,6 @@ namespace MTech.TodoApp.Entities
         public int ParentId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string? Note { get; set; }
-        public TodoStatus Status { get; set; }
+        public TodoStatus TodoStatus { get; set; }
     }
 }

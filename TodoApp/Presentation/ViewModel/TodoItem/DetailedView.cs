@@ -21,7 +21,7 @@ namespace MTech.TodoApp.ViewModel.TodoItem
                 ParentId = x.ParentId,
                 Title = x.Title,
                 Priority = x.Priority,
-                Status = x.Status,
+                Status = x.TodoStatus,
                 DueDate = x.DueDate,
                 Note = x.Note
             };

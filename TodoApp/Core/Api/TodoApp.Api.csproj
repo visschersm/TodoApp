@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\Presentation\ViewModel\TodoApp.ViewModel.csproj" />
     <ProjectReference Include="..\CQRS\TodoApp.CQRS.csproj" />
     <ProjectReference Include="..\DependencyRegistration\TodoApp.DependencyRegistration.csproj" />
+    <ProjectReference Include="..\Domain\TodoApp.Domain.csproj" />
   </ItemGroup>
 
 
