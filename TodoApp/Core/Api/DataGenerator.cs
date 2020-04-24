@@ -30,14 +30,14 @@ namespace MTech.TodoApp.Api
                             Id = 1,
                             ParentId = 1,
                             Title = "Milk",
-                            Status = Status.Planned
+                            Status = TodoStatus.Planned
                         },
                         new Entities.TodoItem
                         {
                             Id = 2,
                             ParentId = 1,
                             Title = "Bread",
-                            Status = Status.Done
+                            Status = TodoStatus.Done
                         }
                     }.ToList()
                 },
@@ -53,7 +53,7 @@ namespace MTech.TodoApp.Api
                             Id = 3,
                             ParentId = 2,
                             Title = "Learn Blazor",
-                            Status = Status.Busy,
+                            Status = TodoStatus.Busy,
                             CreatedDate = DateTime.Today.AddDays(-5),
                             DueDate = DateTime.Today.AddDays(1),
                             Priority = Priority.Highest,
@@ -63,7 +63,7 @@ namespace MTech.TodoApp.Api
                             Id = 4,
                             ParentId = 2,
                             Title = "Architecture",
-                            Status = Status.Done,
+                            Status = TodoStatus.Done,
                             CreatedDate = DateTime.Today,
                             DueDate = DateTime.Today.AddDays(7),
                             Priority = Priority.High
@@ -73,7 +73,7 @@ namespace MTech.TodoApp.Api
                             Id = 5,
                             ParentId = 2,
                             Title = "Learn Vue",
-                            Status = Status.Planned,
+                            Status = TodoStatus.Planned,
                             CreatedDate = DateTime.Today,
                             DueDate = DateTime.Today.AddDays(3),
                             Priority = Priority.Low
