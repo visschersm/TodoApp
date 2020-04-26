@@ -30,6 +30,7 @@ namespace MTech.DependencyRegistration
 
             services.AddScoped<IHandler, DefaultHandler>();
 
+
             return services;
         }
 

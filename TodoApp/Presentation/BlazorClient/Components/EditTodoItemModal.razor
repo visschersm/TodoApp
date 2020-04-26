@@ -1,0 +1,80 @@
+﻿@using System.Text.Json
+@using System.Net.Http
+@inject HttpClient Http
+
+<EditForm class="form-group" Model="@EditTodoItemModel" OnValidSubmit="SaveTodoItem">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <p>
+        <label>
+            Title:
+            <InputText @bind-Value="EditTodoItemModel.Title" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Priority:
+            <InputSelect @bind-Value="EditTodoItemModel.Priority">
+                @foreach (var priority in Enum.GetValues(typeof(Priority)))
+                {
+                    <option value="@priority">@priority.ToString()</option>
+                }
+            </InputSelect>
+        </label>
+    </p>
+    <p>
+        <label>
+            Due Date:
+            <InputDate @bind-Value="EditTodoItemModel.DueDate" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Note:
+            <InputTextArea @bind-Value="EditTodoItemModel.Note" />
+        </label>
+    </p>
+    <button class="btn btn-primary" type="submit">Save</button>
+    <button @onclick="Cancel" class="btn btn-secondary">Cancel</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    public ViewModel.TodoItem.UpdateView EditTodoItemModel { get; set; }
+
+    private ViewModel.TodoItem.ListView _result;
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+
+
+    void SubmitForm() => BlazoredModal.Close(ModalResult.Ok(_result));
+    void Cancel() => BlazoredModal.Cancel();
+
+    [Parameter]
+    public int ParentId { get; set; }
+
+    private async Task SaveTodoItem()
+    {
+        if (EditTodoItemModel == null)
+            return;
+
+        var json = JsonSerializer.Serialize(EditTodoItemModel);
+        var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        var response = await Http.PutAsync($"https://localhost:5001/todo/{ParentId}/Items/{Id}", data);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+
+            _result = await JsonSerializer.DeserializeAsync<ViewModel.TodoItem.ListView>(responseStream, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+        }
+
+        SubmitForm();
+    }
+}

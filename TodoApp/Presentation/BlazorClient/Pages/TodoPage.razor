@@ -3,14 +3,15 @@
 @using ViewModel = MTech.TodoApp.ViewModel
 @using System.Text.Json
 @inject HttpClient Http
-
-<h3>TodoPage</h3>
+@inject IModalService Modal
 
 <h3>TodoLists</h3>
 
+<button @onclick="ShowAddTodoListModal" class="btn btn-primary" style="margin:8px">New TodoList</button>
+
 @foreach (var list in TodoLists)
 {
-    <TodoList TodoListModel="list" />
+    <MTech.TodoApp.BlazorClient.Components.TodoList TodoListModel="list" OnUpdateTodoList="UpdateTodoList" />
 }
 
 @code {
@@ -36,5 +37,14 @@
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
         }
+    }
+
+    private async Task ShowAddTodoListModal()
+    {
+        var messageForm = Modal.Show<Components.AddTodoListModal>();
+        var result = await messageForm.Result;
+
+        if (!result.Cancelled)
+            await UpdateTodoList();
     }
 }

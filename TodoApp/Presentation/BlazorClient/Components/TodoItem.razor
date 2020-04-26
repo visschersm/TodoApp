@@ -2,8 +2,9 @@
 @using ViewModel = MTech.TodoApp.ViewModel
 @using System.Text.Json
 @inject HttpClient Http
+@inject IModalService Modal
 
-<div type="button" class="list-group-item list-group-item-action">
+<div type="button" class="list-group-item list-group-item-action" @onclick="OpenTodoItem">
     <div class="custom-checkbox">
         <input type="checkbox" id="cbx" @bind="TodoItemModel.IsDone">
         <label for="cbx">@TodoItemModel.Title</label>
@@ -13,5 +14,43 @@
 @code {
     [Parameter]
     public ViewModel.TodoItem.ListView TodoItemModel { get; set; } = new ViewModel.TodoItem.ListView();
+
+    private static readonly string baseUrl = "https://localhost:5001/";
+    private static readonly string todoUrl = baseUrl + "todo";
+
+    private async Task OpenTodoItem()
+    {
+        var response = await Http.GetAsync($"{todoUrl}/{TodoItemModel.ParentId}/Items/{TodoItemModel.Id}");
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            var detailedTodoItem = await JsonSerializer.DeserializeAsync<ViewModel.TodoItem.DetailedView>(responseStream, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(Components.EditTodoItemModal.ParentId), TodoItemModel.ParentId);
+            parameters.Add(nameof(Components.EditTodoItemModal.Id), TodoItemModel.Id);
+            parameters.Add(nameof(Components.EditTodoItemModal.EditTodoItemModel),
+                new ViewModel.TodoItem.UpdateView
+                {
+                    Title = TodoItemModel.Title,
+                    DueDate = TodoItemModel.DueDate,
+                    Note = detailedTodoItem.Note,
+                    Priority = TodoItemModel.Priority
+                });
+
+            var messageForm = Modal.Show<Components.EditTodoItemModal>("Edit TodoItem", parameters);
+            var result = await messageForm.Result;
+
+            if (!result.Cancelled)
+            {
+                await OnUpdateTodoList.InvokeAsync(this);
+            }
+        }
+    }
+
+    [Parameter] public EventCallback OnUpdateTodoList { get; set; }
 }
 

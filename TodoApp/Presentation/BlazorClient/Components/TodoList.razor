@@ -2,6 +2,7 @@
 @using ViewModel = MTech.TodoApp.ViewModel
 @using System.Text.Json
 @inject HttpClient Http
+@inject IModalService Modal
 
 <div class="card" style="width: 18rem; margin:8px">
     <div class="card-header" style="color:white; background-color:@TodoListModel.LabelColor;">
@@ -10,12 +11,34 @@
     <ul class="list-group list-group-flush">
         @foreach (var item in TodoListModel.TodoItems)
         {
-            <TodoItem TodoItemModel="item" />
+            <TodoItem TodoItemModel="item" OnUpdateTodoList="OnUpdateTodoList" />
         }
     </ul>
+    <div class="card-body">
+        <button @onclick="@(() => ShowAddTodoItemModal(TodoListModel.Id))" class="btn btn-primary">New Todo</button>
+    </div>
 </div>
 
 @code {
     [Parameter]
     public ViewModel.TodoList.ListView TodoListModel { get; set; }
+
+    private static readonly string baseUrl = "https://localhost:5001/";
+    private static readonly string todoUrl = baseUrl + "todo";
+
+    private async Task ShowAddTodoItemModal(int parentId)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(Components.AddTodoItemModal.ParentId), parentId);
+
+        var messageForm = Modal.Show<Components.AddTodoItemModal>("Add TodoItem", parameters);
+        var result = await messageForm.Result;
+
+        if (!result.Cancelled)
+        {
+            await OnUpdateTodoList.InvokeAsync(this);
+        }
+    }
+
+    [Parameter] public EventCallback OnUpdateTodoList { get; set; }
 }

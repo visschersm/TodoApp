@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Net.Http.Headers;
 using MTech.DependencyRegistration;
 
 namespace TodoApi
@@ -31,6 +32,12 @@ namespace TodoApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(policy =>
+                policy.WithOrigins("http://localhost:8000", "https://localhost:8001")
+                .AllowAnyMethod()
+                .WithHeaders(HeaderNames.ContentType, HeaderNames.Authorization)
+                .AllowCredentials());
 
             app.UseHttpsRedirection();
 

@@ -1,0 +1,70 @@
+﻿@using System.Text.Json
+@using System.Net.Http
+@inject HttpClient Http
+
+<EditForm class="form-group" Model="@NewTodoItem" OnValidSubmit="AddTodoItem">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <p>
+        <label>
+            Title:
+            <InputText @bind-Value="NewTodoItem.Title" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Priority:
+            <InputSelect @bind-Value="NewTodoItem.Priority">
+                @foreach (var priority in Enum.GetValues(typeof(Priority)))
+                {
+                    <option value="@priority">@priority.ToString()</option>
+                }
+            </InputSelect>
+        </label>
+    </p>
+    <p>
+        <label>
+            Due Date:
+            <InputDate @bind-Value="NewTodoItem.DueDate" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Note:
+            <InputTextArea @bind-Value="NewTodoItem.Note" />
+        </label>
+    </p>
+    <button class="btn btn-primary" type="submit">Add</button>
+    <button @onclick="Cancel" class="btn btn-secondary">Cancel</button>
+</EditForm>
+
+@code {
+    private ViewModel.TodoItem.CreateView NewTodoItem { get; set; } = new ViewModel.TodoItem.CreateView
+    {
+        DueDate = DateTime.Today
+    };
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+
+
+    void SubmitForm() => BlazoredModal.Close(ModalResult.Ok(NewTodoItem));
+    void Cancel() => BlazoredModal.Cancel();
+
+    [Parameter]
+    public int ParentId { get; set; }
+
+    private async Task AddTodoItem()
+    {
+        if (NewTodoItem == null)
+            return;
+
+        var json = JsonSerializer.Serialize(NewTodoItem);
+        var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        var response = await Http.PostAsync($"https://localhost:5001/todo/{ParentId}/Items", data);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            SubmitForm();
+        }
+    }
+}
