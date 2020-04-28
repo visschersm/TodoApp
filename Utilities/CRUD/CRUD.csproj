@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>MTech.Utilities.CRUD</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+    <ProjectReference Include="..\CPViewModel\CPViewModel.csproj" />
   </ItemGroup>
 
 </Project>

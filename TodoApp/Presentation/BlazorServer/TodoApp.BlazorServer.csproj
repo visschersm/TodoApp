@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp5.0</TargetFramework>
     <RootNamespace>MTech.TodoApp.BlazorServer</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ViewModel\TodoApp.ViewModel.csproj" />
+    <ProjectReference Include="..\CPViewModel\TodoApp.CPViewModel.csproj" />
   </ItemGroup>
 
 </Project>

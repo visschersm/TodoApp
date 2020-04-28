@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -19,17 +20,18 @@ namespace MTech.Tests.TodoApiTests
     public class TodoControllerTests
     {
         [TestMethod]
-        public async Task Create_ValidRequest_OkObjectResult()
+        public async Task CreateTodoList_ValidRequest_OkObjectResult()
         {
             var factory = new ControllerFactory();
 
             var mockHandler = Mock.Of<IHandler>();
             Mock.Get(mockHandler).Setup(
-                x => x.HandleCommand<CreateTodoItemCommand, CreateTodoItemCommandResult>(
-                It.IsAny<CreateTodoItemCommand>()))
-                .ReturnsAsync(new CreateTodoItemCommandResult
+                x => x.HandleCommand<CreateTodoListCommand, CreateTodoListCommandResult>(
+                It.IsAny<CreateTodoListCommand>()))
+                .ReturnsAsync(new CreateTodoListCommandResult
                 {
-                    Successfull = true
+                    Successfull = true,
+                    Data = new ViewModel.TodoList.CreatedView()
                 });
 
             var toCreate = new ViewModel.TodoList.CreateView();
@@ -38,12 +40,82 @@ namespace MTech.Tests.TodoApiTests
 
             var controller = factory.Create<TodoController>();
 
-            var result = await controller.Create(toCreate);
+            var result = await controller.CreateTodoList(toCreate);
 
-            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
-            Assert.IsInstanceOfType(
-                ((OkObjectResult)result).Value,
-                typeof(CreateTodoListCommandResult));
+            result.Should().BeOfType<OkObjectResult>();
+            ((OkObjectResult)result).Value.Should()
+                .BeOfType<ViewModel.TodoList.CreatedView>();
+        }
+
+        [TestMethod]
+        public async Task CreateTodoList_HandlerThrows_Rethrows()
+        {
+            var factory = new ControllerFactory();
+
+            var mockHandler = Mock.Of<IHandler>();
+            Mock.Get(mockHandler).Setup(
+                x => x.HandleCommand<CreateTodoListCommand, CreateTodoListCommandResult>(
+                    It.IsAny<CreateTodoListCommand>()))
+                .ThrowsAsync(new Exception());
+
+            var toCreate = new ViewModel.TodoList.CreateView();
+
+            factory.Services.Replace(ServiceDescriptor.Scoped(factory => mockHandler));
+
+            var controller = factory.Create<TodoController>();
+
+            Func<Task> act = async () => await controller.CreateTodoList(toCreate);
+
+            await act.Should().ThrowAsync<Exception>();
+        }
+
+        [TestMethod]
+        public async Task CreateTodoItem_ValidRequest_OkObjectResult()
+        {
+            var factory = new ControllerFactory();
+
+            var mockHandler = Mock.Of<IHandler>();
+            Mock.Get(mockHandler).Setup(
+                x => x.HandleCommand<CreateTodoItemCommand, CreateTodoItemCommandResult>(
+                    It.IsAny<CreateTodoItemCommand>()))
+                .ReturnsAsync(new CreateTodoItemCommandResult
+                {
+                    Successfull = true,
+                    Data = new ViewModel.TodoItem.CreatedView()
+                });
+
+            var toCreate = new ViewModel.TodoItem.CreateView();
+
+            factory.Services.Replace(ServiceDescriptor.Scoped(factory => mockHandler));
+
+            var controller = factory.Create<TodoController>();
+
+            var result = await controller.CreateTodoItem(1, toCreate);
+
+            result.Should().BeOfType<OkObjectResult>();
+            ((OkObjectResult)result).Value.Should().BeOfType<ViewModel.TodoItem.CreatedView>();
+        }
+
+        [TestMethod]
+        public async Task CreateTodoItem_HandlerThrows_Rethrows()
+        {
+            var factory = new ControllerFactory();
+
+            var mockHandler = Mock.Of<IHandler>();
+            Mock.Get(mockHandler).Setup(
+                x => x.HandleCommand<CreateTodoItemCommand, CreateTodoItemCommandResult>(
+                    It.IsAny<CreateTodoItemCommand>()))
+                .ThrowsAsync(new Exception());
+
+            var toCreate = new ViewModel.TodoItem.CreateView();
+
+            factory.Services.Replace(ServiceDescriptor.Scoped(factory => mockHandler));
+
+            var controller = factory.Create<TodoController>();
+
+            Func<Task> act = async () => await controller.CreateTodoItem(1, toCreate);
+
+            await act.Should().ThrowAsync<Exception>();
         }
 
         [TestMethod]

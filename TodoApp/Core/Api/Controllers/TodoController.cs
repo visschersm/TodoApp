@@ -21,7 +21,7 @@ namespace MTech.TodoApp.TodoApi
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(ViewModel.TodoList.CreatedView), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Create([FromBody] ViewModel.TodoList.CreateView toCreate)
+        public async Task<IActionResult> CreateTodoList([FromBody] ViewModel.TodoList.CreateView toCreate)
         {
             var result = await _handler.HandleCommand<CreateTodoListCommand, CreateTodoListCommandResult>(
                 new CreateTodoListCommand(toCreate));

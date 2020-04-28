@@ -3,7 +3,7 @@ using System.Globalization;
 
 // https://stackoverflow.com/questions/2109756/how-do-i-get-the-color-from-a-hexadecimal-color-code-using-net
 
-namespace CPExtensions
+namespace MTech.Utilities.Extensions
 {
     public static class ColorExtensions
     {

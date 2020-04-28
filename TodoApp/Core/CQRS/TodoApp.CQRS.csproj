@@ -12,11 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Utilities\RequestHandler\RequestHandler.csproj" />
-    <ProjectReference Include="..\..\..\Utilities\ViewModel\ViewModel.csproj" />
-    <ProjectReference Include="..\..\Presentation\ViewModel\TodoApp.ViewModel.csproj" />
+    <ProjectReference Include="..\..\Presentation\CPViewModel\TodoApp.CPViewModel.csproj" />
     <ProjectReference Include="..\DataModel.Interfaces\TodoApp.DataModel.Interfaces.csproj" />
-    <ProjectReference Include="..\Entities\TodoApp.Entities.csproj" />
-    <ProjectReference Include="..\Domain\TodoApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>
