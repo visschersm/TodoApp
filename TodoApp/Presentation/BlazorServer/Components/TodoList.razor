@@ -21,7 +21,7 @@
 
 @code {
     [Parameter]
-    public ViewModel.TodoList.ListView TodoListModel { get; set; }
+    public ViewModel.TodoList.ListView TodoListModel { get; set; } = null!;
 
     private static readonly string baseUrl = "https://localhost:5001/";
     private static readonly string todoUrl = baseUrl + "todo";

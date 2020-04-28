@@ -22,7 +22,7 @@
 
 @code {
     private ViewModel.TodoList.CreateView NewTodoListModel { get; set; } = new ViewModel.TodoList.CreateView();
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = null!;
 
     protected override void OnInitialized() => BlazoredModal.SetTitle("Create new TodoList");
 

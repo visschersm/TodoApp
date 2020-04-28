@@ -15,7 +15,7 @@
         <label>
             Priority:
             <InputSelect @bind-Value="NewTodoItem.Priority">
-                @foreach (var priority in Enum.GetValues(typeof(Priority)))
+                @foreach (var priority in (Priority[])Enum.GetValues(typeof(Priority)))
                 {
                     <option value="@priority">@priority.ToString()</option>
                 }
@@ -44,7 +44,7 @@
         DueDate = DateTime.Today
     };
 
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = null!;
 
 
     void SubmitForm() => BlazoredModal.Close(ModalResult.Ok(NewTodoItem));

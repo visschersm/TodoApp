@@ -15,7 +15,7 @@
         <label>
             Priority:
             <InputSelect @bind-Value="EditTodoItemModel.Priority">
-                @foreach (var priority in Enum.GetValues(typeof(Priority)))
+                @foreach (var priority in (Priority[])Enum.GetValues(typeof(Priority)))
                 {
                     <option value="@priority">@priority.ToString()</option>
                 }
@@ -43,11 +43,11 @@
     public int Id { get; set; }
 
     [Parameter]
-    public ViewModel.TodoItem.UpdateView EditTodoItemModel { get; set; }
+    public ViewModel.TodoItem.UpdateView EditTodoItemModel { get; set; } = new ViewModel.TodoItem.UpdateView();
 
-    private ViewModel.TodoItem.ListView _result;
+    private ViewModel.TodoItem.ListView _result = null!;
 
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = null!;
 
 
     void SubmitForm() => BlazoredModal.Close(ModalResult.Ok(_result));
@@ -65,9 +65,12 @@
         var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
         var response = await Http.PutAsync($"https://localhost:5001/todo/{ParentId}/Items/{Id}", data);
 
+        if (response == null || response!.Content == null)
+            return;
+
         if (response.StatusCode == System.Net.HttpStatusCode.OK)
         {
-            using var responseStream = await response.Content.ReadAsStreamAsync();
+            using var responseStream = await response!.Content!.ReadAsStreamAsync();
 
             _result = await JsonSerializer.DeserializeAsync<ViewModel.TodoItem.ListView>(responseStream, new JsonSerializerOptions
             {

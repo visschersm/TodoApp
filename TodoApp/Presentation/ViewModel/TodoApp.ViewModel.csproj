@@ -1,14 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>MTech.TodoApp.ViewModel</RootNamespace>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+    <RootNamespace>MTech.TodoApp.CPViewModel</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Utilities\Extensions\Extensions.csproj" />
     <ProjectReference Include="..\..\..\Utilities\ViewModel\ViewModel.csproj" />
+    <ProjectReference Include="..\..\Core\Domain\TodoApp.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\Entities\TodoApp.Entities.csproj" />
   </ItemGroup>
 
 </Project>

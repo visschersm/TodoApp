@@ -22,7 +22,7 @@
 
 @code {
     private ViewModel.TodoList.CreateView NewTodoListModel { get; set; } = new ViewModel.TodoList.CreateView();
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = null!;
 
     protected override void OnInitialized() => BlazoredModal.SetTitle("Create new TodoList");
 
@@ -37,7 +37,11 @@
         var json = JsonSerializer.Serialize(NewTodoListModel);
         var data = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
         var response = await Http.PostAsync("https://localhost:5001/todo", data);
-        string result = await response.Content.ReadAsStringAsync();
+
+        if (response == null || response!.Content == null)
+            return;
+
+        string result = await response!.Content!.ReadAsStringAsync();
 
         NewTodoListModel = new ViewModel.TodoList.CreateView { };
 

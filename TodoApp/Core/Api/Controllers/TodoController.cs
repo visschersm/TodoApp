@@ -50,7 +50,7 @@ namespace MTech.TodoApp.TodoApi
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(ViewModel.TodoList.ListView[]), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetTodoLists()
         {
             var result = await _handler.HandleQuery<GetAllTodoListsQuery, TodoListsListViewQueryResult>(
                 new GetAllTodoListsQuery());

@@ -21,9 +21,13 @@
     private async Task OpenTodoItem()
     {
         var response = await Http.GetAsync($"{todoUrl}/{TodoItemModel.ParentId}/Items/{TodoItemModel.Id}");
+
+        if (response == null || response.Content == null)
+            return;
+
         if (response.StatusCode == System.Net.HttpStatusCode.OK)
         {
-            using var responseStream = await response.Content.ReadAsStreamAsync();
+            using var responseStream = await response!.Content!.ReadAsStreamAsync();
             var detailedTodoItem = await JsonSerializer.DeserializeAsync<ViewModel.TodoItem.DetailedView>(responseStream, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase

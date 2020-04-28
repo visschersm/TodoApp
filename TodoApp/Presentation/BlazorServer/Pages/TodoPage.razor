@@ -28,6 +28,9 @@
     private async Task UpdateTodoList()
     {
         var response = await Http.GetAsync(todoUrl);
+        if (response == null || response.Content == null)
+            return;
+
         if (response.StatusCode == System.Net.HttpStatusCode.OK)
         {
             using var responseStream = await response.Content.ReadAsStreamAsync();

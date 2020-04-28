@@ -43,11 +43,11 @@
     public int Id { get; set; }
 
     [Parameter]
-    public ViewModel.TodoItem.UpdateView EditTodoItemModel { get; set; }
+    public ViewModel.TodoItem.UpdateView EditTodoItemModel { get; set; } = new ViewModel.TodoItem.UpdateView();
 
-    private ViewModel.TodoItem.ListView _result;
+    private ViewModel.TodoItem.ListView _result = null!;
 
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = null!;
 
 
     void SubmitForm() => BlazoredModal.Close(ModalResult.Ok(_result));

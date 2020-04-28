@@ -23,6 +23,7 @@ namespace MTech.TodoApp.Entities
             }
         }
 
+
         [NotMapped]
         public Color LabelColor { get; set; }
     }

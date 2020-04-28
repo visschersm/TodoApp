@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TodoApp.CPEntities\TodoApp.CPEntities.csproj" />
+    <ProjectReference Include="..\Entities\TodoApp.Entities.csproj" />
   </ItemGroup>
 
 </Project>

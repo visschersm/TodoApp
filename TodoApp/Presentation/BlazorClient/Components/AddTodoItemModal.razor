@@ -44,7 +44,7 @@
         DueDate = DateTime.Today
     };
 
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = null!;
 
 
     void SubmitForm() => BlazoredModal.Close(ModalResult.Ok(NewTodoItem));

@@ -1,4 +1,5 @@
-﻿using MTech.Utilities.ViewModel;
+﻿using MTech.Utilities.Extensions;
+using MTech.Utilities.ViewModel;
 using System.Collections.Generic;
 
 namespace MTech.TodoApp.ViewModel.TodoList
@@ -12,7 +13,7 @@ namespace MTech.TodoApp.ViewModel.TodoList
                 Id = x.Id,
                 Title = x.Title,
                 TodoItems = x.TodoItems.ProjectTo<Entities.TodoItem, TodoItem.ListView>(),
-                LabelColor = System.Drawing.ColorTranslator.ToHtml(x.LabelColor)
+                LabelColor = x.LabelColor.ToHtml()
             };
         }
 

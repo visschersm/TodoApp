@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CPViewModel\TodoApp.CPViewModel.csproj" />
+    <ProjectReference Include="..\ViewModel\TodoApp.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>
